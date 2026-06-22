@@ -1,0 +1,75 @@
+@theme {
+  /* Primitive */
+  --color-blue-25: #F5F6FF;
+  --color-blue-50: #EEF2FA;
+  --color-blue-100: #D8DFEB;
+  --color-blue-600: #0A5AA8;
+  --color-blue-700: #004E96;
+  --color-blue-800: #003D78;
+
+  --color-navy-900: #0C2D52;
+
+  --color-gray-900: #222222;
+  --color-gray-800: #4D4D4D;
+  --color-gray-600: #656D7B;
+  --color-gray-500: #7A8AA3;
+  --color-gray-400: #B7B7B7;
+  --color-gray-300: #A8B2C2;
+  --color-gray-200: #D9D9D9;
+
+  --color-white: #FFFFFF;
+
+  --color-secondary: #7FC241;
+
+  --color-red-50: #FCEBEB;
+  --color-red-200: #F09595;
+  --color-red-600: #E24B4A;
+  --color-red-800: #791F1F;
+
+  /* Semantic — color/bg */
+  --color-bg-page: var(--color-blue-25);
+  --color-bg-surface: var(--color-white);
+
+  /* Semantic — color/text */
+  --color-text-heading: var(--color-navy-900);
+  --color-text-body: var(--color-gray-900);
+  --color-text-muted: var(--color-gray-500);
+  --color-text-placeholder: var(--color-gray-300);
+  --color-text-link: var(--color-blue-700);
+  --color-text-on-primary: var(--color-white);
+
+  /* Semantic — color/border */
+  --color-border-default: var(--color-blue-100);
+  --color-border-focus: var(--color-blue-700);
+
+  /* Semantic — color/action */
+  --color-action-primary: var(--color-blue-700);
+  --color-action-primary-hover: var(--color-blue-800);
+  --color-action-primary-gradient-start: var(--color-blue-600);
+  --color-action-primary-gradient-end: var(--color-blue-800);
+  --color-action-secondary: var(--color-secondary);
+
+  /* Semantic — color/error */
+  --color-error-bg: var(--color-red-50);
+  --color-error-border: var(--color-red-200);
+  --color-error-text: var(--color-red-600);
+  --color-error-text-dark: var(--color-red-800);
+
+  /* Component — input */
+  --color-input-bg: var(--color-bg-surface);
+  --color-input-border-default: var(--color-border-default);
+  --color-input-border-focus: var(--color-border-focus);
+  --color-input-text-placeholder: var(--color-text-placeholder);
+
+  /* Component — button-primary */
+  --color-button-primary-bg-start: var(--color-action-primary-gradient-start);
+  --color-button-primary-bg-end: var(--color-action-primary-gradient-end);
+  --color-button-primary-text: var(--color-text-on-primary);
+
+  /* Component — link */
+  --color-link-text: var(--color-text-link);
+
+  /* Component — secondary */
+  --color-secondary-default: var(--color-secondary);
+  --color-secondary-light: color-mix(in srgb, var(--color-secondary) 20%, transparent);
+}

@@ -1,0 +1,110 @@
+@theme {
+  --font-sans: "Pretendard", system-ui, sans-serif;
+
+  /* Caption — Regular (400) */
+  --text-caption1: 20px;
+  --text-caption1--line-height: normal;
+  --text-caption1--font-weight: 400;
+
+  --text-caption2: 18px;
+  --text-caption2--line-height: normal;
+  --text-caption2--font-weight: 400;
+
+  --text-caption3: 16px;
+  --text-caption3--line-height: normal;
+  --text-caption3--font-weight: 400;
+
+  --text-caption4: 14px;
+  --text-caption4--line-height: normal;
+  --text-caption4--font-weight: 400;
+
+  --text-caption5: 12px;
+  --text-caption5--line-height: normal;
+  --text-caption5--font-weight: 400;
+
+  --text-caption6: 10px;
+  --text-caption6--line-height: normal;
+  --text-caption6--font-weight: 400;
+
+  /* Body — Medium (500) */
+  --text-body1: 16px;
+  --text-body1--line-height: normal;
+  --text-body1--font-weight: 500;
+
+  --text-body2: 14px;
+  --text-body2--line-height: normal;
+  --text-body2--font-weight: 500;
+
+  --text-body3: 12px;
+  --text-body3--line-height: 18px;
+  --text-body3--font-weight: 500;
+
+  /* Title — Bold (700) */
+  --text-title1: 24px;
+  --text-title1--line-height: normal;
+  --text-title1--font-weight: 700;
+
+  --text-title2: 20px;
+  --text-title2--line-height: normal;
+  --text-title2--font-weight: 700;
+
+  --text-title3: 18px;
+  --text-title3--line-height: normal;
+  --text-title3--font-weight: 700;
+
+  /* Button — Bold (700) */
+  --text-button1: 18px;
+  --text-button1--line-height: normal;
+  --text-button1--font-weight: 700;
+
+  --text-button2: 16px;
+  --text-button2--line-height: normal;
+  --text-button2--font-weight: 700;
+
+  --text-button3: 14px;
+  --text-button3--line-height: normal;
+  --text-button3--font-weight: 700;
+
+  --text-button4: 12px;
+  --text-button4--line-height: normal;
+  --text-button4--font-weight: 700;
+
+  /* Label — SemiBold (600) */
+  --text-label1: 16px;
+  --text-label1--line-height: normal;
+  --text-label1--font-weight: 600;
+
+  --text-label2: 14px;
+  --text-label2--line-height: normal;
+  --text-label2--font-weight: 600;
+
+  --text-label3: 12px;
+  --text-label3--line-height: normal;
+  --text-label3--font-weight: 600;
+}
+
+@layer base {
+  .text-caption1 { font-family: var(--font-sans); font-size: var(--text-caption1); line-height: var(--text-caption1--line-height); font-weight: var(--text-caption1--font-weight); }
+  .text-caption2 { font-family: var(--font-sans); font-size: var(--text-caption2); line-height: var(--text-caption2--line-height); font-weight: var(--text-caption2--font-weight); }
+  .text-caption3 { font-family: var(--font-sans); font-size: var(--text-caption3); line-height: var(--text-caption3--line-height); font-weight: var(--text-caption3--font-weight); }
+  .text-caption4 { font-family: var(--font-sans); font-size: var(--text-caption4); line-height: var(--text-caption4--line-height); font-weight: var(--text-caption4--font-weight); }
+  .text-caption5 { font-family: var(--font-sans); font-size: var(--text-caption5); line-height: var(--text-caption5--line-height); font-weight: var(--text-caption5--font-weight); }
+  .text-caption6 { font-family: var(--font-sans); font-size: var(--text-caption6); line-height: var(--text-caption6--line-height); font-weight: var(--text-caption6--font-weight); }
+
+  .text-body1 { font-family: var(--font-sans); font-size: var(--text-body1); line-height: var(--text-body1--line-height); font-weight: var(--text-body1--font-weight); }
+  .text-body2 { font-family: var(--font-sans); font-size: var(--text-body2); line-height: var(--text-body2--line-height); font-weight: var(--text-body2--font-weight); }
+  .text-body3 { font-family: var(--font-sans); font-size: var(--text-body3); line-height: var(--text-body3--line-height); font-weight: var(--text-body3--font-weight); }
+
+  .text-title1 { font-family: var(--font-sans); font-size: var(--text-title1); line-height: var(--text-title1--line-height); font-weight: var(--text-title1--font-weight); }
+  .text-title2 { font-family: var(--font-sans); font-size: var(--text-title2); line-height: var(--text-title2--line-height); font-weight: var(--text-title2--font-weight); }
+  .text-title3 { font-family: var(--font-sans); font-size: var(--text-title3); line-height: var(--text-title3--line-height); font-weight: var(--text-title3--font-weight); }
+
+  .text-button1 { font-family: var(--font-sans); font-size: var(--text-button1); line-height: var(--text-button1--line-height); font-weight: var(--text-button1--font-weight); }
+  .text-button2 { font-family: var(--font-sans); font-size: var(--text-button2); line-height: var(--text-button2--line-height); font-weight: var(--text-button2--font-weight); }
+  .text-button3 { font-family: var(--font-sans); font-size: var(--text-button3); line-height: var(--text-button3--line-height); font-weight: var(--text-button3--font-weight); }
+  .text-button4 { font-family: var(--font-sans); font-size: var(--text-button4); line-height: var(--text-button4--line-height); font-weight: var(--text-button4--font-weight); }
+
+  .text-label1 { font-family: var(--font-sans); font-size: var(--text-label1); line-height: var(--text-label1--line-height); font-weight: var(--text-label1--font-weight); }
+  .text-label2 { font-family: var(--font-sans); font-size: var(--text-label2); line-height: var(--text-label2--line-height); font-weight: var(--text-label2--font-weight); }
+  .text-label3 { font-family: var(--font-sans); font-size: var(--text-label3); line-height: var(--text-label3--line-height); font-weight: var(--text-label3--font-weight); }
+}

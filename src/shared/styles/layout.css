@@ -1,0 +1,33 @@
+@theme {
+  /* Frame */
+  --frame-ios-width: 390px;
+  --frame-ios-height: 844px;
+
+  --frame-android-width: 360px;
+  --frame-android-height: 800px;
+
+  /* Grid unit */
+  --grid-unit-ios-sm: 4px;
+  --grid-unit-ios-lg: 8px;
+
+  --grid-unit-android-sm: 4px;
+  --grid-unit-android-lg: 8px;
+
+  /* Margin */
+  --spacing-margin-sm: 16px;
+  --spacing-margin-lg: 20px;
+}
+
+@layer base {
+  html {
+    background-color: var(--color-gray-200);
+  }
+
+  body {
+    min-width: 375px;
+    max-width: 430px;
+    min-height: 100dvh;
+    margin: 0 auto;
+    background-color: var(--color-bg-page);
+  }
+}
