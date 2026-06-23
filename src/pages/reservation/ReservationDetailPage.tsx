@@ -1,5 +1,3 @@
 export function ReservationDetailPage() {
-  return (
-    <div>ReservationDetailPage</div>
-  )
+  return <div>ReservationDetailPage</div>;
 }

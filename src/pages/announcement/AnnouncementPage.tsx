@@ -1,5 +1,3 @@
 export function AnnouncementPage() {
-  return (
-    <div>AnnouncementPage</div>
-  )
+  return <div>AnnouncementPage</div>;
 }
