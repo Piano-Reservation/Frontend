@@ -18,14 +18,14 @@ function TodayReservationCard({
 }: TodayReservationCardProps) {
   return (
     <div className='rounded-xl bg-[var(--color-blue-700)] px-[18px] py-5'>
-      <p className='mb-3 text-[14px] font-bold text-white'>{dateText}</p>
+      <p className='mb-3 text-label2 text-white'>{dateText}</p>
 
       {reservations.length === 0 ? (
         <div className='flex min-h-[140px] flex-col items-center justify-center rounded-xl bg-white text-center'>
-          <p className='mb-2 text-[14px] font-medium text-[#818080]'>
+          <p className='mb-2 text-body2 text-[#818080]'>
             등록된 일정이 없습니다
           </p>
-          <p className='text-[12px] font-medium text-[#BABABA]'>
+          <p className='text-body3 text-[#BABABA]'>
             홈화면에서 연습실을 예약해보세요
           </p>
         </div>
@@ -36,10 +36,10 @@ function TodayReservationCard({
               key={reservation.id}
               className='flex min-h-[54px] items-center justify-between rounded-xl bg-white px-[17px]'>
               <div className='flex items-center gap-[18px]'>
-                <strong className='text-[16px] font-semibold'>
+                <strong className='text-label1'>
                   {reservation.room}
                 </strong>
-                <span className='text-[14px] font-medium text-[#515151]'>
+                <span className='text-body2 text-[#515151]'>
                   {reservation.time}
                 </span>
               </div>

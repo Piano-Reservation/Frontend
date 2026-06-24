@@ -19,7 +19,7 @@ const statusStyle: Record<ReservationStatus, string> = {
 function StatusBadge({status}: StatusBadgeProps) {
   return (
     <span
-      className={`min-w-[76px] rounded-full px-3 py-1.5 text-center text-[12px] font-medium ${statusStyle[status]}`}>
+      className={`min-w-[76px] rounded-full px-3 py-1.5 text-center text-body3 ${statusStyle[status]}`}>
       {statusText[status]}
     </span>
   );
