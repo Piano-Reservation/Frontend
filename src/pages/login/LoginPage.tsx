@@ -47,7 +47,6 @@ export function LoginPage() {
           로그인
         </Button>
       </form>
-
     </AuthLayout>
   );
 }
