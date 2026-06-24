@@ -6,20 +6,31 @@ import AuthLayout from '@/app/layout/AuthLayout';
 import {Button, Input} from '@/shared/components';
 import {ROUTES} from '@/shared/constants/routes';
 
-export function LoginPage() {
+export function RegisterPage() {
   const navigate = useNavigate();
+  const [name, setName] = useState('');
   const [employeeId, setEmployeeId] = useState('');
   const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // TODO: 로그인 API 연동
-    navigate(ROUTES.HOME);
+    // TODO: 학생 인증 API 연동
+    navigate(ROUTES.LOGIN);
   };
 
   return (
     <AuthLayout>
       <form className='flex w-full flex-col gap-5' onSubmit={handleSubmit}>
+        <Input
+          id='name'
+          label='이름'
+          placeholder='이름을 입력하세요'
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          autoComplete='name'
+          fullWidth
+        />
         <Input
           id='employee-id'
           label='아이디(사번)'
@@ -38,24 +49,24 @@ export function LoginPage() {
           inputMode='numeric'
           value={password}
           onChange={(e) => setPassword(e.target.value.replace(/\D/g, ''))}
-          autoComplete='current-password'
+          autoComplete='new-password'
+          fullWidth
+        />
+        <Input
+          id='email'
+          label='이메일'
+          placeholder='이메일을 입력하세요'
+          type='email'
+          inputMode='email'
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          autoComplete='email'
           fullWidth
         />
         <Button type='submit' fullWidth>
-          로그인
+          학생 인증 요청하기
         </Button>
       </form>
-
-      <div className='mt-7.5 flex flex-col items-center gap-2'>
-        <p className='text-body1 text-text-muted text-center tracking-[0.48px]'>
-          앱을 처음 사용하시나요?
-        </p>
-        <a
-          className='border-link-text text-body1 text-link-text cursor-pointer border-b tracking-[0.48px]'
-          onClick={() => navigate(ROUTES.REGISTER)}>
-          피아노과 학생 인증하기
-        </a>
-      </div>
     </AuthLayout>
   );
 }

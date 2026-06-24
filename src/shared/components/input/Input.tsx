@@ -1,6 +1,6 @@
-import type { InputHTMLAttributes, ReactNode } from 'react';
+import type {InputHTMLAttributes, ReactNode} from 'react';
 
-import { cn } from '@/shared/utils/cn';
+import {cn} from '@/shared/utils/cn';
 
 type InputProps = InputHTMLAttributes<HTMLInputElement> & {
   label?: string;
@@ -25,30 +25,36 @@ const Input = ({
   const hasError = !!errorMessage;
 
   return (
-    <div className={cn('flex flex-col gap-1', fullWidth && 'w-full')}>
+    <div className={cn('flex flex-col gap-2', fullWidth && 'w-full')}>
       {label && (
-        <label className='text-label2 text-text-heading' htmlFor={id}>
+        <label
+          className='text-body1 text-text-body tracking-[0.48px]'
+          htmlFor={id}>
           {label}
         </label>
       )}
       <div
         className={cn(
-          'flex h-12 items-center gap-2 rounded-[10px] border bg-input-bg px-3',
+          'bg-input-bg flex h-12 items-center gap-2 rounded-[10px] border px-3',
           hasError
             ? 'border-error-border'
             : 'border-input-border-default focus-within:border-input-border-focus focus-within:shadow-[0px_0px_3px_0px_rgba(0,0,0,0.4)]',
-          fullWidth && 'w-full',
+          fullWidth && 'w-full'
         )}>
-        {leftIcon && <span className='shrink-0 text-text-muted'>{leftIcon}</span>}
+        {leftIcon && (
+          <span className='text-text-muted shrink-0'>{leftIcon}</span>
+        )}
         <input
           className={cn(
-            'min-w-0 flex-1 bg-transparent text-caption2 tracking-[0.54px] text-text-body outline-none placeholder:text-input-text-placeholder',
-            className,
+            'text-caption2 text-text-body placeholder:text-input-text-placeholder min-w-0 flex-1 bg-transparent tracking-[0.54px] outline-none',
+            className
           )}
           id={id}
           {...props}
         />
-        {rightIcon && <span className='shrink-0 text-text-muted'>{rightIcon}</span>}
+        {rightIcon && (
+          <span className='text-text-muted shrink-0'>{rightIcon}</span>
+        )}
       </div>
       {hasError ? (
         <p className='text-body3 text-error-text'>{errorMessage}</p>

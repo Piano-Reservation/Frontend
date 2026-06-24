@@ -1,8 +1,14 @@
-import type { ButtonHTMLAttributes, ReactNode } from 'react';
+import type {ButtonHTMLAttributes, ReactNode} from 'react';
 
-import { cn } from '@/shared/utils/cn';
+import {cn} from '@/shared/utils/cn';
 
-type ButtonVariant = 'primary' | 'gray' | 'secondary' | 'outline' | 'ghost' | 'danger';
+type ButtonVariant =
+  | 'primary'
+  | 'gray'
+  | 'secondary'
+  | 'outline'
+  | 'ghost'
+  | 'danger';
 type ButtonSize = 'large' | 'medium' | 'small';
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
@@ -15,16 +21,20 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 };
 
 const baseClassName =
-  'inline-flex items-center justify-center gap-2 rounded-xl border font-sans tracking-[0.54px] transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700 disabled:cursor-not-allowed disabled:opacity-50';
+  'inline-flex cursor-pointer items-center justify-center gap-2 rounded-xl border font-sans tracking-[0.54px] transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700 disabled:cursor-not-allowed disabled:opacity-50';
 
 const variantClassNames: Record<ButtonVariant, string> = {
   primary:
     'border-transparent bg-linear-to-r from-button-primary-bg-start to-button-primary-bg-end text-button-primary-text hover:from-blue-700 hover:to-blue-800',
   gray: 'border-transparent bg-gray-200 text-gray-900 hover:bg-gray-300',
-  secondary: 'border-transparent bg-secondary-default text-white hover:bg-secondary',
-  outline: 'border-border-default bg-bg-surface text-action-primary hover:bg-blue-50',
-  ghost: 'border-transparent bg-transparent text-action-primary hover:bg-blue-50',
-  danger: 'border-transparent bg-error-text text-white hover:bg-error-text-dark',
+  secondary:
+    'border-transparent bg-secondary-default text-white hover:bg-secondary',
+  outline:
+    'border-border-default bg-bg-surface text-action-primary hover:bg-blue-50',
+  ghost:
+    'border-transparent bg-transparent text-action-primary hover:bg-blue-50',
+  danger:
+    'border-transparent bg-error-text text-white hover:bg-error-text-dark',
 };
 
 const sizeClassNames: Record<ButtonSize, string> = {
@@ -55,7 +65,7 @@ const Button = ({
         variantClassNames[variant],
         sizeClassNames[size],
         fullWidth && 'w-full',
-        className,
+        className
       )}
       disabled={isDisabled}
       type={type}

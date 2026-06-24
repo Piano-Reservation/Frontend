@@ -7,13 +7,20 @@ import {HomePage} from '@/pages/home/HomePage';
 export const router = createBrowserRouter([
   {
     path: ROUTES.ROOT,
-    element: <Navigate to={ROUTES.HOME} replace />,
+    element: <Navigate to={ROUTES.LOGIN} replace />,
   },
   {
     path: ROUTES.LOGIN,
     lazy: async () => {
       const {LoginPage} = await import('@/pages/login/LoginPage');
       return {Component: LoginPage};
+    },
+  },
+  {
+    path: ROUTES.REGISTER,
+    lazy: async () => {
+      const {RegisterPage} = await import('@/pages/register/RegisterPage');
+      return {Component: RegisterPage};
     },
   },
   {
