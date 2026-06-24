@@ -1,3 +1,9 @@
+import HomeDate from '@/pages/home/components/HomeDate';
+
 export function HomePage() {
-  return <div>HomePage</div>;
+  return (
+    <div>
+      <HomeDate />
+    </div>
+  );
 }
