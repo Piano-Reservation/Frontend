@@ -1,4 +1,4 @@
-import type {InputHTMLAttributes, ReactNode} from 'react';
+import {useId, type InputHTMLAttributes, type ReactNode} from 'react';
 
 import {cn} from '@/shared/utils/cn';
 
@@ -22,6 +22,8 @@ const Input = ({
   id,
   ...props
 }: InputProps) => {
+  const generatedId = useId();
+  const inputId = id ?? generatedId;
   const hasError = !!errorMessage;
 
   return (
@@ -29,7 +31,7 @@ const Input = ({
       {label && (
         <label
           className='text-body1 text-text-body tracking-[0.48px]'
-          htmlFor={id}>
+          htmlFor={inputId}>
           {label}
         </label>
       )}
@@ -49,7 +51,7 @@ const Input = ({
             'text-caption2 text-text-body placeholder:text-input-text-placeholder min-w-0 flex-1 bg-transparent tracking-[0.54px] outline-none',
             className
           )}
-          id={id}
+          id={inputId}
           {...props}
         />
         {rightIcon && (

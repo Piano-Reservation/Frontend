@@ -6,7 +6,7 @@ import AuthLayout from '@/app/layout/AuthLayout';
 import {Button, Input} from '@/shared/components';
 import {ROUTES} from '@/shared/constants/routes';
 
-export function LoginPage() {
+const LoginPage = () => {
   const navigate = useNavigate();
   const [employeeId, setEmployeeId] = useState('');
   const [password, setPassword] = useState('');
@@ -49,4 +49,6 @@ export function LoginPage() {
       </form>
     </AuthLayout>
   );
-}
+};
+
+export default LoginPage;
