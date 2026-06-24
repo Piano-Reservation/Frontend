@@ -10,4 +10,5 @@ export {default as IcSvgGachon} from './ic-gachon';
 export {default as IcSvgHouse} from './ic-house';
 export {default as IcSvgLogo} from './ic-logo';
 export {default as IcSvgSchedule} from './ic-schedule';
+export {default as IcSvgTriangleAlert} from './ic-triangle-alert';
 export {default as IcSvgUser} from './ic-user';
