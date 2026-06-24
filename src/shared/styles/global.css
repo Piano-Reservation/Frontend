@@ -31,9 +31,26 @@
   src: url('/fonts/Pretendard-Bold.woff2') format('woff2');
 }
 
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @layer base {
   body {
     font-family: var(--font-sans);
     color: var(--color-text-primary);
+  }
+
+  button:not(:disabled),
+  a,
+  [role='button'] {
+    cursor: pointer;
   }
 }

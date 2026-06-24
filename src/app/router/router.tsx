@@ -57,6 +57,13 @@ export const router = createBrowserRouter([
     ],
   },
   {
+    path: ROUTES.FLOOR_DETAIL,
+    lazy: async () => {
+      const {default: FloorDetailPage} = await import('@/pages/home/FloorDetailPage');
+      return {Component: FloorDetailPage};
+    },
+  },
+  {
     path: '*',
     element: <Navigate to={ROUTES.HOME} replace />,
   },

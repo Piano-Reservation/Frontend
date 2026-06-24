@@ -1,0 +1,42 @@
+import {cn} from '@/shared/utils/cn';
+
+export type TimeSlotStatus = 'available' | 'booked';
+
+export interface TimeSlot {
+  hour: number;
+  status: TimeSlotStatus;
+}
+
+interface ReservationTimelineProps {
+  slots: TimeSlot[];
+  selectedHours?: number[];
+  onToggleHour?: (hour: number) => void;
+}
+
+const ReservationTimeline = ({slots, selectedHours = [], onToggleHour}: ReservationTimelineProps) => (
+  <div className='inline-grid grid-cols-[20px_64px] gap-x-2.5 gap-y-2.5'>
+    {slots.map(({hour, status}) => {
+      const isUserSelected = selectedHours.includes(hour);
+      const isToggleable = status === 'available';
+
+      return (
+        <div key={hour} className='contents'>
+          <span className='text-label3 self-start text-center text-text-body'>{hour}</span>
+          <button
+            type='button'
+            disabled={!isToggleable}
+            onClick={() => isToggleable && onToggleHour?.(hour)}
+            className={cn(
+              'h-4.5 w-full',
+              status === 'available' && !isUserSelected && 'border border-dashed border-text-body',
+              status === 'available' && isUserSelected && 'bg-gray-200',
+              status === 'booked' && 'bg-secondary',
+            )}
+          />
+        </div>
+      );
+    })}
+  </div>
+);
+
+export default ReservationTimeline;

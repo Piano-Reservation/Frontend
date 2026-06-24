@@ -11,7 +11,7 @@ interface ToastProps {
 const Toast = ({variant, message}: ToastProps) => (
   <div
     className={cn(
-      'flex h-11 w-70 items-center gap-1.5 overflow-hidden rounded-lg border px-3.5 py-1',
+      'flex h-11 w-full items-center gap-1.5 overflow-hidden rounded-lg border px-3.5 py-1',
       variant === 'success' && 'border-action-primary bg-blue-100',
       variant === 'error' && 'border-error-border bg-error-bg',
     )}>

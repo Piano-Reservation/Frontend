@@ -1,3 +1,5 @@
+import {type TimeSlot} from '@/pages/home/components/ReservationTimeline';
+
 export const DAYS = ['일', '월', '화', '수', '목', '금', '토'] as const;
 
 export const FLOORS = [3, 1, 'B1'] as const;
@@ -20,25 +22,42 @@ export const NOTICES = [
 
 export const ROOMS_BY_FLOOR: Record<FloorValue, string[]> = {
   3: [
-    '예술체육대학1호',
-    '예술체육대학2호',
-    '예술체육대학3호',
-    '예술체육대학4호',
-    '예술체육대학5호',
-    '예술체육대학6호',
+    '예술체육대학2-301호(전공실기 3,4)',
+    '예술체육대학2-302호(전체)',
+    '예술체육대학2-303호(전공실기 5,6)',
+    '예술체육대학2-304호(전공실기 1,2)',
+    '예술체육대학2-310호(전공실기 7,8)',
   ],
   1: [
-    '예술체육대학7호',
-    '예술체육대학8호',
-    '예술체육대학9호',
-    '예술체육대학10호',
+    '예술체육대학1-101호',
+    '예술체육대학1-102호',
+    '예술체육대학1-103호',
+    '예술체육대학1-104호',
   ],
   B1: [
-    '예술체육대학11호',
-    '예술체육대학12호',
-    '예술체육대학13호',
-    '예술체육대학14호',
-    '예술체육대학15호',
-    '예술체육대학16호',
+    '예술체육대학B1-1호',
+    '예술체육대학B1-2호',
+    '예술체육대학B1-3호',
+    '예술체육대학B1-4호',
+    '예술체육대학B1-5호',
+    '예술체육대학B1-6호',
   ],
 };
+
+export const MOCK_SLOTS: TimeSlot[] = [
+  {hour: 9, status: 'available'},
+  {hour: 10, status: 'available'},
+  {hour: 11, status: 'available'},
+  {hour: 12, status: 'available'},
+  {hour: 13, status: 'available'},
+  {hour: 14, status: 'available'},
+  {hour: 15, status: 'available'},
+  {hour: 16, status: 'available'},
+  {hour: 17, status: 'booked'},
+  {hour: 18, status: 'booked'},
+  {hour: 19, status: 'available'},
+  {hour: 20, status: 'available'},
+  {hour: 21, status: 'available'},
+  {hour: 22, status: 'available'},
+  {hour: 23, status: 'available'},
+];
