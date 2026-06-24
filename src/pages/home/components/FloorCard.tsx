@@ -1,7 +1,7 @@
 import {IcSvgChevronRight} from '@/shared/icons';
 
 interface FloorCardProps {
-  floor: number;
+  floor: number | string;
   onClick?: () => void;
 }
 
