@@ -29,7 +29,7 @@ function HistoryTimeline({histories}: HistoryTimelineProps) {
     <div className='rounded-xl border border-gray-200 bg-white px-[18px] py-4 shadow-sm'>
       {histories.length === 0 ? (
         <div className='flex min-h-[120px] flex-col items-center justify-center text-center'>
-          <p className='mb-2 text-body2 text-[#818080]'>
+          <p className='text-body2 mb-2 text-[#818080]'>
             지난 이용 기록이 없습니다
           </p>
           <p className='text-body3 text-[#BABABA]'>
@@ -39,7 +39,7 @@ function HistoryTimeline({histories}: HistoryTimelineProps) {
       ) : (
         histories.map((history) => (
           <div key={history.id}>
-            <div className='mb-2 flex items-center gap-2 text-label2'>
+            <div className='text-label2 mb-2 flex items-center gap-2'>
               <img
                 src={IcSchedule}
                 alt='시계 로고'
@@ -52,7 +52,7 @@ function HistoryTimeline({histories}: HistoryTimelineProps) {
               {history.items.map((item, index) => (
                 <div
                   key={index}
-                  className='flex items-center justify-between text-caption4 text-[#737373]'>
+                  className='text-caption4 flex items-center justify-between text-[#737373]'>
                   <span>
                     {item.room} {item.time}
                   </span>
@@ -66,7 +66,7 @@ function HistoryTimeline({histories}: HistoryTimelineProps) {
                     {item.status === 'completed' ? (
                       '✓'
                     ) : (
-                      <img src={IcClose} alt="" className="h-[12px] w-[12px]" />
+                      <img src={IcClose} alt='' className='h-[12px] w-[12px]' />
                     )}{' '}
                     {historyStatusText[item.status]}
                   </span>
@@ -74,7 +74,7 @@ function HistoryTimeline({histories}: HistoryTimelineProps) {
               ))}
             </div>
 
-            <button className='mx-auto mt-3 block border-none bg-transparent text-body3 text-[#737373]'>
+            <button className='text-body3 mx-auto mt-3 block border-none bg-transparent text-[#737373]'>
               + 더보기
             </button>
           </div>

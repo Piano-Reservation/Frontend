@@ -48,7 +48,7 @@ export const MyReservationPage = () => {
   return (
     <div className='mx-auto min-h-[calc(100dvh-72px)] w-full max-w-[430px] overflow-x-hidden bg-[#F4F5FC]'>
       <main className='w-full px-[22px] pt-[20px] pb-[24px]'>
-        <header className='mb-[22px] flex items-center justify-between text-caption5'>
+        <header className='text-caption5 mb-[22px] flex items-center justify-between'>
           <div className='flex items-center gap-1 whitespace-nowrap text-gray-900'>
             <img
               src={IcGachon}
@@ -66,12 +66,12 @@ export const MyReservationPage = () => {
           </div>
         </header>
 
-        <h1 className='mb-[30px] text-title1 tracking-[-0.5px]'>
+        <h1 className='text-title1 mb-[30px] tracking-[-0.5px]'>
           내 예약 확인
         </h1>
 
         <section className='mb-[34px]'>
-          <h2 className='mb-3 text-label1'>오늘의 연습실</h2>
+          <h2 className='text-label1 mb-3'>오늘의 연습실</h2>
 
           <TodayReservationCard
             dateText='x월 x일 x요일'
@@ -80,7 +80,7 @@ export const MyReservationPage = () => {
         </section>
 
         <section>
-          <h2 className='mb-3 text-label1'>지난 이용 기록</h2>
+          <h2 className='text-label1 mb-3'>지난 이용 기록</h2>
 
           <HistoryTimeline histories={historyData} />
         </section>
