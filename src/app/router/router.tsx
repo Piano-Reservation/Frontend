@@ -12,7 +12,7 @@ export const router = createBrowserRouter([
   {
     path: ROUTES.LOGIN,
     lazy: async () => {
-      const {LoginPage} = await import('@/pages/login/LoginPage');
+      const {default: LoginPage} = await import('@/pages/login/LoginPage');
       return {Component: LoginPage};
     },
   },
