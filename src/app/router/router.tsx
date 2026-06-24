@@ -34,9 +34,9 @@ export const router = createBrowserRouter([
       {
         path: ROUTES.RESERVATION,
         lazy: async () => {
-          const {ReservationPage} =
-            await import('@/pages/reservation/ReservationPage');
-          return {Component: ReservationPage};
+          const {MyReservationPage} =
+            await import('@/pages/reservation/MyReservationPage');
+          return {Component: MyReservationPage};
         },
       },
       {
