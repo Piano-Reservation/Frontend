@@ -1,6 +1,7 @@
 // (auto-generated) Do not edit manually.
 // Run `pnpm build:icons` to regenerate.
 
+export {default as IcSvgChevronRight} from './ic-chevron-right';
 export {default as IcSvgClose} from './ic-close';
 export {default as IcSvgBell} from './ic-bell';
 export {default as IcSvgCalendarCheck} from './ic-calendar-check';
