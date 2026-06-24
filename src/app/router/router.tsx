@@ -17,13 +17,6 @@ export const router = createBrowserRouter([
     },
   },
   {
-    path: ROUTES.REGISTER,
-    lazy: async () => {
-      const {RegisterPage} = await import('@/pages/register/RegisterPage');
-      return {Component: RegisterPage};
-    },
-  },
-  {
     element: <AppLayout />,
     children: [
       {

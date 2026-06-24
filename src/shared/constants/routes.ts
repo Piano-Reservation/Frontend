@@ -1,8 +1,7 @@
 export const ROUTES = {
   ROOT: '/',
   LOGIN: '/login',
-  REGISTER: '/register',
-  HOME: '/home',
+HOME: '/home',
   RESERVATION: '/reservation',
   RESERVATION_DETAIL: '/reservation/:id',
   MY_PAGE: '/mypage',

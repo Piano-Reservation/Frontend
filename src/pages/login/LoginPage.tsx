@@ -38,6 +38,8 @@ export function LoginPage() {
           inputMode='numeric'
           value={password}
           onChange={(e) => setPassword(e.target.value.replace(/\D/g, ''))}
+          minLength={6}
+          maxLength={72}
           autoComplete='current-password'
           fullWidth
         />
@@ -46,16 +48,6 @@ export function LoginPage() {
         </Button>
       </form>
 
-      <div className='mt-7.5 flex flex-col items-center gap-2'>
-        <p className='text-body1 text-text-muted text-center tracking-[0.48px]'>
-          앱을 처음 사용하시나요?
-        </p>
-        <a
-          className='border-link-text text-body1 text-link-text cursor-pointer border-b tracking-[0.48px]'
-          onClick={() => navigate(ROUTES.REGISTER)}>
-          피아노과 학생 인증하기
-        </a>
-      </div>
     </AuthLayout>
   );
 }
