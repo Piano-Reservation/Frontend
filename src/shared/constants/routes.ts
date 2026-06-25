@@ -7,7 +7,8 @@ export const ROUTES = {
   RESERVATION: '/reservation',
   RESERVATION_DETAIL: '/reservation/:id',
   MY_PAGE: '/mypage',
-  ANNOUNCEMENT: '/announcement',
+  PASSWORD_CHANGE: '/mypage/password',
+  REPORT: '/mypage/report',
 } as const;
 
 export const createPath = {
