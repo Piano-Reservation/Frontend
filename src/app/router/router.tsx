@@ -64,6 +64,13 @@ export const router = createBrowserRouter([
     },
   },
   {
+    path: ROUTES.FLOOR_STATUS,
+    lazy: async () => {
+      const {default: FloorStatusPage} = await import('@/pages/home/FloorStatusPage');
+      return {Component: FloorStatusPage};
+    },
+  },
+  {
     path: '*',
     element: <Navigate to={ROUTES.HOME} replace />,
   },

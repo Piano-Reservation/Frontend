@@ -17,6 +17,10 @@ export function HomePage() {
     navigate(createPath.floorDetail(floor));
   };
 
+  const handleFloorStatusClick = (floor: FloorValue) => {
+    navigate(createPath.floorStatus(floor));
+  };
+
   return (
     <>
       <main className='flex flex-col gap-8 p-5 pb-23'>
@@ -37,6 +41,13 @@ export function HomePage() {
           </div>
         )}
         {activeTab === '유의사항' && <HomeNoticeSection />}
+        {activeTab === '예약 현황' && (
+          <div className='flex flex-col gap-5'>
+            {FLOORS.map((floor) => (
+              <FloorCard key={floor} floor={floor} onClick={() => handleFloorStatusClick(floor)} />
+            ))}
+          </div>
+        )}
       </main>
       <BottomNavigation />
     </>
