@@ -3,7 +3,7 @@ import IcLeft from '@/shared/assets/svg/ic-chevron-left.svg';
 import {useState} from 'react';
 import {useNavigate} from 'react-router';
 import {ROUTES} from '@/shared/constants/routes';
-import PasswordField from './components/PasswordField';
+import Input from '@/shared/components/input/Input';
 
 const PASSWORD_REGEX =
   /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).{8,16}$/;
@@ -56,46 +56,47 @@ export const PasswordChangePage = () => {
         </header>
 
         <section className='mb-[30px] rounded-[12px] bg-white px-[20px] py-[20px]'>
-          <PasswordField
-            id='current-password'
-            label='현재 비밀번호'
-            value={currentPassword}
-            onChange={(event) => setCurrentPassword(event.target.value)}
-            isInvalid={currentPassword.length > 0 && !isCurrentPasswordValid}
-            className='mb-[18px]'>
-            {currentPassword && !isCurrentPasswordValid && (
-              <p className='text-caption5 mt-[10px] text-[var(--color-red-600)]'>
-                현재 비밀번호가 일치하지 않습니다.
-              </p>
-            )}
-          </PasswordField>
+          <div className='flex flex-col gap-4.5'>
+            <Input
+              type='password'
+              label='현재 비밀번호'
+              value={currentPassword}
+              onChange={(event) => setCurrentPassword(event.target.value)}
+              errorMessage={
+                currentPassword.length > 0 && !isCurrentPasswordValid
+                  ? '현재 비밀번호가 일치하지 않습니다.'
+                  : undefined
+              }
+              fullWidth
+            />
 
-          <PasswordField
-            id='new-password'
-            label='새 비밀번호'
-            value={newPassword}
-            onChange={(event) => setNewPassword(event.target.value)}
-            isInvalid={newPassword.length > 0 && !isNewPasswordValid}
-            className='mb-[18px]'>
-            <p className='text-caption5 mt-[10px] leading-[1.7] text-[var(--color-red-600)]'>
-              비밀번호는 8자 이상, 16자 이하여야 합니다.
-              <br />
-              영문, 숫자, 특수문자를 포함해야 합니다.
-            </p>
-          </PasswordField>
+            <Input
+              type='password'
+              label='새 비밀번호'
+              value={newPassword}
+              onChange={(event) => setNewPassword(event.target.value)}
+              errorMessage={
+                newPassword.length > 0 && !isNewPasswordValid
+                  ? '비밀번호는 8자 이상, 16자 이하여야 합니다. 영문, 숫자, 특수문자를 포함해야 합니다.'
+                  : undefined
+              }
+              helperText='비밀번호는 8자 이상, 16자 이하여야 합니다. 영문, 숫자, 특수문자를 포함해야 합니다.'
+              fullWidth
+            />
 
-          <PasswordField
-            id='new-password-confirm'
-            label='새 비밀번호 확인'
-            value={newPasswordConfirm}
-            onChange={(event) => setNewPasswordConfirm(event.target.value)}
-            isInvalid={newPasswordConfirm.length > 0 && !isPasswordMatched}>
-            {newPasswordConfirm && !isPasswordMatched && (
-              <p className='text-caption5 mt-[10px] text-[var(--color-red-600)]'>
-                새 비밀번호가 일치하지 않습니다.
-              </p>
-            )}
-          </PasswordField>
+            <Input
+              type='password'
+              label='새 비밀번호 확인'
+              value={newPasswordConfirm}
+              onChange={(event) => setNewPasswordConfirm(event.target.value)}
+              errorMessage={
+                newPasswordConfirm.length > 0 && !isPasswordMatched
+                  ? '새 비밀번호가 일치하지 않습니다.'
+                  : undefined
+              }
+              fullWidth
+            />
+          </div>
         </section>
 
         <button
