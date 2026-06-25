@@ -10,6 +10,9 @@ interface ToastProps {
 
 const Toast = ({variant, message}: ToastProps) => (
   <div
+    role={variant === 'error' ? 'alert' : 'status'}
+    aria-live={variant === 'error' ? 'assertive' : 'polite'}
+    aria-atomic='true'
     className={cn(
       'flex h-11 w-full items-center gap-1.5 overflow-hidden rounded-lg border px-3.5 py-1',
       variant === 'success' && 'border-action-primary bg-blue-100',

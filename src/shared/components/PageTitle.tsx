@@ -15,7 +15,7 @@ const PageTitle = ({
   className,
 }: PageTitleProps) => (
   <div className={cn('flex items-center gap-1', className)}>
-    {variant === 'back' && (
+    {variant === 'back' && onBack && (
       <button type='button' onClick={onBack} aria-label='뒤로 가기'>
         <IcSvgChevronLeft className='text-text-body size-6 shrink-0' />
       </button>

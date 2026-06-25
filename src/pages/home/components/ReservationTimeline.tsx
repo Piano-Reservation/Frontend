@@ -22,6 +22,11 @@ const ReservationTimeline = ({
     {slots.map(({hour, status}) => {
       const isUserSelected = selectedHours.includes(hour);
       const isToggleable = status === 'available';
+      const statusLabel = isUserSelected
+        ? '선택됨'
+        : status === 'available'
+          ? '예약 가능'
+          : '예약됨';
 
       return (
         <div key={hour} className='contents'>
@@ -30,6 +35,7 @@ const ReservationTimeline = ({
           </span>
           <button
             type='button'
+            aria-label={`${hour}시 ${statusLabel}`}
             disabled={!isToggleable}
             onClick={() => isToggleable && onToggleHour?.(hour)}
             className={cn(

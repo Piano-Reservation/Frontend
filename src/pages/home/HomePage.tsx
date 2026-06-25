@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import {useLocation, useNavigate} from 'react-router';
 
-import {BottomNavigation, Header} from '@/shared/components';
+import {Header} from '@/shared/components';
 import {createPath} from '@/shared/constants/routes';
 import FloorCard from '@/pages/home/components/FloorCard';
 import HomeDate from '@/pages/home/components/HomeDate';
@@ -56,7 +56,6 @@ export function HomePage() {
           </div>
         )}
       </main>
-      <BottomNavigation />
     </>
   );
 }

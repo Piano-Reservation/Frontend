@@ -1,5 +1,9 @@
 {
   "permissions": {
-    "allow": ["Bash(pnpm exec *)"]
+    "allow": [
+      "Bash(pnpm exec svgr *)",
+      "Bash(pnpm exec prettier *)",
+      "Bash(Remove-Item \"c:\\\\Piano-Frontend\\\\src\\\\shared\\\\assets\\\\svg\\\\ic-logo.svg\")"
+    ]
   }
 }

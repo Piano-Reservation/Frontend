@@ -54,23 +54,25 @@ const FloorDetailPage = () => {
         </div>
 
         <div className='flex items-start justify-between'>
-          <div className='flex flex-col gap-3'>
-            {rooms.map((room) => (
-              <button
-                key={room}
-                type='button'
-                onClick={() => setSelectedRoom(room)}
-                className={cn(
-                  'text-button4 w-60 overflow-hidden rounded-lg p-3 text-left tracking-[-0.24px]',
-                  selectedRoom === room
-                    ? 'bg-action-primary text-white'
-                    : 'bg-bg-surface border-border-default text-text-body border'
-                )}>
-                {room}
-              </button>
-            ))}
+          <div className='flex flex-col justify-between self-stretch'>
+            <div className='flex flex-col gap-3'>
+              {rooms.map((room) => (
+                <button
+                  key={room}
+                  type='button'
+                  onClick={() => setSelectedRoom(room)}
+                  className={cn(
+                    'text-button4 w-60 overflow-hidden rounded-lg p-3 text-left tracking-[-0.24px]',
+                    selectedRoom === room
+                      ? 'bg-action-primary text-white'
+                      : 'bg-bg-surface border-border-default text-text-body border'
+                  )}>
+                  {room}
+                </button>
+              ))}
+            </div>
 
-            <div className='mt-2 inline-grid grid-cols-[34px_auto] items-center gap-x-1.5 gap-y-1.5 rounded-lg bg-white p-2'>
+            <div className='inline-grid grid-cols-[34px_auto] items-center gap-x-1.5 gap-y-1.5 rounded-lg bg-white p-2'>
               <div className='border-text-body h-3.5 w-8.5 border border-dashed' />
               <span className='text-text-body text-[9px]'>예약 가능</span>
               <div className='h-3.5 w-8.5 bg-gray-200' />
@@ -93,7 +95,7 @@ const FloorDetailPage = () => {
       <div className='p-5 pt-0'>
         <button
           type='button'
-          disabled={!selectedRoom}
+          disabled={!selectedRoom || selectedHours.length === 0}
           onClick={open}
           className='bg-action-primary text-button1 h-12 w-full rounded-xl tracking-[0.54px] text-white disabled:opacity-40'>
           예약하기

@@ -11,7 +11,6 @@ export {default as IcSvgCircleAlert} from './ic-circle-alert';
 export {default as IcSvgCircleX} from './ic-circle-x';
 export {default as IcSvgGachon} from './ic-gachon';
 export {default as IcSvgHouse} from './ic-house';
-export {default as IcSvgLogo} from './ic-logo';
 export {default as IcSvgSchedule} from './ic-schedule';
 export {default as IcSvgTriangleAlert} from './ic-triangle-alert';
 export {default as IcSvgUser} from './ic-user';

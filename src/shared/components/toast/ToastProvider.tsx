@@ -1,4 +1,4 @@
-import {useCallback, useRef, useState, type ReactNode} from 'react';
+import {useCallback, useEffect, useRef, useState, type ReactNode} from 'react';
 
 import Toast from '@/shared/components/toast/Toast';
 import {
@@ -14,6 +14,12 @@ export const ToastProvider = ({children}: {children: ReactNode}) => {
     if (timerRef.current) clearTimeout(timerRef.current);
     setToast(newToast);
     timerRef.current = setTimeout(() => setToast(null), 3000);
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      if (timerRef.current) clearTimeout(timerRef.current);
+    };
   }, []);
 
   return (
