@@ -43,7 +43,7 @@ function CancelConfirmModal({
           <p
             id='cancel-modal-description'
             className='text-body3 text-[var(--color-gray-500)]'>
-            유의사항을 작성해주세요.
+            취소한 예약은 되돌릴 수 없습니다.
             <br />위 내용을 숙지하고 취소하시겠습니까?
           </p>
         </div>

@@ -2,12 +2,7 @@ import type {ComponentType, SVGProps} from 'react';
 import {NavLink, useLocation} from 'react-router';
 
 import {ROUTES} from '@/shared/constants/routes';
-import {
-  IcSvgBell,
-  IcSvgCalendarCheck,
-  IcSvgHouse,
-  IcSvgUser,
-} from '@/shared/icons';
+import {IcSvgCalendarCheck, IcSvgHouse, IcSvgUser} from '@/shared/icons';
 
 type NavigationItem = {
   label: string;
@@ -22,12 +17,6 @@ const navigationItems: NavigationItem[] = [
     path: ROUTES.HOME,
     icon: IcSvgHouse,
     isActive: (pathname) => pathname === ROUTES.HOME,
-  },
-  {
-    label: '공지사항',
-    path: ROUTES.ANNOUNCEMENT,
-    icon: IcSvgBell,
-    isActive: (pathname) => pathname === ROUTES.ANNOUNCEMENT,
   },
   {
     label: '내 예약 확인',
@@ -49,7 +38,7 @@ const BottomNavigation = () => {
   return (
     <nav
       aria-label='하단 내비게이션'
-      className='border-border-default bg-bg-surface fixed right-0 bottom-0 left-0 z-50 mx-auto grid h-[72px] max-w-[430px] min-w-[375px] grid-cols-4 items-start border-t shadow-[0_-4px_18px_rgba(12,45,82,0.06)]'>
+      className='border-border-default bg-bg-surface fixed right-0 bottom-0 left-0 z-50 mx-auto grid h-[72px] max-w-[430px] min-w-[375px] grid-cols-3 items-start border-t shadow-[0_-4px_18px_rgba(12,45,82,0.06)]'>
       {navigationItems.map(({label, path, icon: Icon, isActive}) => {
         const active = isActive(pathname);
 

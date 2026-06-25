@@ -89,7 +89,7 @@ export const MyReservationPage = () => {
   };
 
   return (
-    <div className='mx-auto min-h-[calc(100dvh-72px)] w-full max-w-[430px] overflow-x-hidden bg-[#F4F5FC]'>
+    <div className='mx-auto min-h-[calc(100dvh-72px)] w-full max-w-[430px] overflow-x-hidden bg-[var(--color-blue-25)]'>
       <main className='w-full px-[22px] pt-[20px] pb-[24px]'>
         <header className='text-caption5 mb-[22px] flex items-center justify-between'>
           <div className='flex items-center gap-1 whitespace-nowrap text-gray-900'>
