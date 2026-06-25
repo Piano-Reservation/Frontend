@@ -22,7 +22,7 @@ const HomeMenu = ({activeTab, onTabChange}: HomeMenuProps) => (
             'text-button3 flex h-8.5 w-[108px] items-center justify-center rounded-full border tracking-[0.24px]',
             isActive
               ? 'bg-action-primary border-transparent text-white'
-              : 'bg-bg-surface border-border-default text-gray-600',
+              : 'bg-bg-surface border-border-default text-gray-600'
           )}>
           {tab}
         </button>

@@ -44,7 +44,11 @@ export function HomePage() {
         {activeTab === '예약 현황' && (
           <div className='flex flex-col gap-5'>
             {FLOORS.map((floor) => (
-              <FloorCard key={floor} floor={floor} onClick={() => handleFloorStatusClick(floor)} />
+              <FloorCard
+                key={floor}
+                floor={floor}
+                onClick={() => handleFloorStatusClick(floor)}
+              />
             ))}
           </div>
         )}

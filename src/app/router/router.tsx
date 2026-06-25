@@ -59,14 +59,16 @@ export const router = createBrowserRouter([
   {
     path: ROUTES.FLOOR_DETAIL,
     lazy: async () => {
-      const {default: FloorDetailPage} = await import('@/pages/home/FloorDetailPage');
+      const {default: FloorDetailPage} =
+        await import('@/pages/home/FloorDetailPage');
       return {Component: FloorDetailPage};
     },
   },
   {
     path: ROUTES.FLOOR_STATUS,
     lazy: async () => {
-      const {default: FloorStatusPage} = await import('@/pages/home/FloorStatusPage');
+      const {default: FloorStatusPage} =
+        await import('@/pages/home/FloorStatusPage');
       return {Component: FloorStatusPage};
     },
   },

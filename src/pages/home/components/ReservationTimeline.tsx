@@ -13,7 +13,11 @@ interface ReservationTimelineProps {
   onToggleHour?: (hour: number) => void;
 }
 
-const ReservationTimeline = ({slots, selectedHours = [], onToggleHour}: ReservationTimelineProps) => (
+const ReservationTimeline = ({
+  slots,
+  selectedHours = [],
+  onToggleHour,
+}: ReservationTimelineProps) => (
   <div className='inline-grid grid-cols-[20px_64px] gap-x-2.5 gap-y-2.5'>
     {slots.map(({hour, status}) => {
       const isUserSelected = selectedHours.includes(hour);
@@ -21,16 +25,20 @@ const ReservationTimeline = ({slots, selectedHours = [], onToggleHour}: Reservat
 
       return (
         <div key={hour} className='contents'>
-          <span className='text-label3 self-start text-center text-text-body'>{hour}</span>
+          <span className='text-label3 text-text-body self-start text-center'>
+            {hour}
+          </span>
           <button
             type='button'
             disabled={!isToggleable}
             onClick={() => isToggleable && onToggleHour?.(hour)}
             className={cn(
               'h-4.5 w-full',
-              status === 'available' && !isUserSelected && 'border border-dashed border-text-body',
+              status === 'available' &&
+                !isUserSelected &&
+                'border-text-body border border-dashed',
               status === 'available' && isUserSelected && 'bg-gray-200',
-              status === 'booked' && 'bg-secondary',
+              status === 'booked' && 'bg-secondary'
             )}
           />
         </div>

@@ -1,4 +1,4 @@
-import { DAYS } from "../constants/home";
+import {DAYS} from '../constants/home';
 
 const HomeDate = () => {
   const now = new Date();

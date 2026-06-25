@@ -11,10 +11,10 @@ const RoomCard = ({label, isSelected = false, onClick}: RoomCardProps) => (
     type='button'
     onClick={onClick}
     className={cn(
-      'flex w-full items-center overflow-hidden rounded-lg p-3 text-button4 tracking-[-0.24px]',
+      'text-button4 flex w-full items-center overflow-hidden rounded-lg p-3 tracking-[-0.24px]',
       isSelected
         ? 'bg-action-primary text-white'
-        : 'bg-bg-surface border border-border-default text-text-body',
+        : 'bg-bg-surface border-border-default text-text-body border'
     )}>
     {label}
   </button>

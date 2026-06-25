@@ -1,7 +1,10 @@
 import {useCallback, useRef, useState, type ReactNode} from 'react';
 
 import Toast from '@/shared/components/toast/Toast';
-import {ToastContext, type ToastState} from '@/shared/components/toast/ToastContext';
+import {
+  ToastContext,
+  type ToastState,
+} from '@/shared/components/toast/ToastContext';
 
 export const ToastProvider = ({children}: {children: ReactNode}) => {
   const [toast, setToast] = useState<ToastState | null>(null);
