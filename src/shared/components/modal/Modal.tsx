@@ -67,12 +67,17 @@ const Modal = ({
   const handleDialogKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
     if (e.key !== 'Tab') return;
     const focusable = Array.from(
-      dialogRef.current?.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTORS) ?? []
+      dialogRef.current?.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTORS) ??
+        []
     );
     if (focusable.length === 0) return;
     const first = focusable[0];
     const last = focusable[focusable.length - 1];
-    if (e.shiftKey ? document.activeElement === first : document.activeElement === last) {
+    if (
+      e.shiftKey
+        ? document.activeElement === first
+        : document.activeElement === last
+    ) {
       e.preventDefault();
       (e.shiftKey ? last : first).focus();
     }
