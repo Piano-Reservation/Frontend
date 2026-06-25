@@ -10,11 +10,13 @@ export interface Reservation {
 interface TodayReservationCardProps {
   dateText: string;
   reservations: Reservation[];
+  onCancelClick?: (reservation: Reservation) => void;
 }
 
 function TodayReservationCard({
   dateText,
   reservations,
+  onCancelClick,
 }: TodayReservationCardProps) {
   return (
     <div className='rounded-xl bg-[var(--color-blue-700)] px-[18px] py-5'>
@@ -36,13 +38,22 @@ function TodayReservationCard({
               key={reservation.id}
               className='flex min-h-[54px] items-center justify-between rounded-xl bg-white px-[17px]'>
               <div className='flex items-center gap-[18px]'>
-                <strong className='text-label1'>{reservation.room}</strong>
+                <strong className='text-label1'>
+                  {reservation.room}
+                </strong>
                 <span className='text-body2 text-[#515151]'>
                   {reservation.time}
                 </span>
               </div>
 
-              <StatusBadge status={reservation.status} />
+              <StatusBadge
+                status={reservation.status}
+                onClick={
+                  reservation.status === 'cancelable'
+                    ? () => onCancelClick?.(reservation)
+                    : undefined
+                }
+              />
             </div>
           ))}
         </div>
