@@ -20,7 +20,7 @@ function MyPageMenuList({menuItems}: MyPageMenuListProps) {
           <span className='text-label1 text-[#222222]'>{item.label}</span>
           <img
             src={IcRight}
-            alt='가천대학교 로고'
+            alt='다음 로고'
             className='h-[20px] w-[20px]'
           />
         </button>

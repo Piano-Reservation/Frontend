@@ -16,11 +16,18 @@ function CancelConfirmModal({
 
   return (
     <div className='fixed inset-0 z-[60] flex items-center justify-center bg-black/50 px-[24px]'>
-      <div className='w-full max-w-[320px] rounded-[24px] bg-white px-[26px] py-[24px]'>
+      <div
+        role='dialog'
+        aria-modal='true'
+        aria-labelledby='cancel-modal-title'
+        aria-describedby='cancel-modal-description'
+        className='w-full max-w-[320px] rounded-[24px] bg-white px-[26px] py-[24px]'>
         <div className='mb-[13px] flex items-center justify-between'>
           <div className='flex items-center gap-[7px]'>
             <img src={IcAlert} alt='주의 로고' className='h-[20px] w-[20px]' />
-            <h2 className='text-title3 text-[#222222]'>취소 유의사항</h2>
+            <h2 id='cancel-modal-title' className='text-title3 text-[#222222]'>
+              취소 유의사항
+            </h2>
           </div>
 
           <button
@@ -33,7 +40,9 @@ function CancelConfirmModal({
         </div>
 
         <div className='mb-[18px] rounded-[16px] bg-[var(--color-blue-25)] px-[20px] py-[18px] text-center'>
-          <p className='text-body3 text-[var(--color-gray-500)]'>
+          <p
+            id='cancel-modal-description'
+            className='text-body3 text-[var(--color-gray-500)]'>
             유의사항을 작성해주세요.
             <br />위 내용을 숙지하고 취소하시겠습니까?
           </p>

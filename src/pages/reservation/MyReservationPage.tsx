@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useRef, useState} from 'react';
 
 import IcGachon from '@/shared/assets/svg/ic-gachon.svg';
 import TodayReservationCard, {
@@ -49,6 +49,8 @@ const historyData: History[] = [
 ];
 
 export const MyReservationPage = () => {
+  const toastTimerRef = useRef<number | null>(null);
+
   const [todayReservations, setTodayReservations] = useState<Reservation[]>(
     initialTodayReservations
   );
@@ -78,7 +80,10 @@ export const MyReservationPage = () => {
     setSelectedReservation(null);
     setIsToastOpen(true);
 
-    window.setTimeout(() => {
+    if (toastTimerRef.current) {
+      window.clearTimeout(toastTimerRef.current);
+    }
+    toastTimerRef.current = window.setTimeout(() => {
       setIsToastOpen(false);
     }, 2000);
   };
