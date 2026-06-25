@@ -4,7 +4,7 @@ import {BottomNavigation} from '@/shared/components';
 
 const AppLayout = () => {
   return (
-    <div className='min-h-dvh pb-[72px]'>
+    <div className='min-h-dvh pb-18'>
       <Outlet />
       <BottomNavigation />
     </div>
