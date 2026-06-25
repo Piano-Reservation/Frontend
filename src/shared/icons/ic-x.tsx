@@ -1,5 +1,5 @@
 import type {SVGProps} from 'react';
-const IcSvgChevronRight = (props: SVGProps<SVGSVGElement>) => (
+const IcSvgX = (props: SVGProps<SVGSVGElement>) => (
   <svg
     xmlns='http://www.w3.org/2000/svg'
     fill='none'
@@ -10,8 +10,8 @@ const IcSvgChevronRight = (props: SVGProps<SVGSVGElement>) => (
       strokeLinecap='round'
       strokeLinejoin='round'
       strokeWidth={1.667}
-      d='m7.5 15 5-5-5-5'
+      d='M15 5 5 15M5 5l10 10'
     />
   </svg>
 );
-export default IcSvgChevronRight;
+export default IcSvgX;
