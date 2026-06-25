@@ -1,4 +1,8 @@
+import {useEffect, useState} from 'react';
+import {useLocation, useNavigate} from 'react-router';
+
 import IcGachon from '@/shared/assets/svg/ic-gachon.svg';
+import Toast from '@/pages/reservation/components/Toast';
 import MyInfoCard from './components/MyInfoCard';
 import MyPageMenuList from './components/MyPageMenuList';
 import RestrictionStatusCard from './components/RestrictionStatusCard';
@@ -32,8 +36,30 @@ const menuItems = [
 ];
 
 export const MyPage = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const [isToastOpen, setIsToastOpen] = useState(() =>
+    Boolean(location.state?.isPasswordChanged)
+  );
+
+  useEffect(() => {
+    if (!location.state?.isPasswordChanged) return;
+
+    navigate(location.pathname, {replace: true, state: null});
+  }, [location.pathname, location.state, navigate]);
+
+  useEffect(() => {
+    if (!isToastOpen) return;
+
+    const toastTimer = window.setTimeout(() => {
+      setIsToastOpen(false);
+    }, 2000);
+
+    return () => window.clearTimeout(toastTimer);
+  }, [isToastOpen]);
+
   return (
-    <div className='mx-auto min-h-[calc(100dvh-72px)] w-full max-w-[430px] overflow-x-hidden bg-[#F4F5FC]'>
+    <div className='mx-auto min-h-[calc(100dvh-72px)] w-full max-w-[430px] overflow-x-hidden bg-[var(--color-blue-25)]'>
       <main className='w-full px-[22px] pt-[20px] pb-[24px]'>
         <header className='text-caption5 mb-[22px] flex items-center justify-between'>
           <div className='flex items-center gap-1 whitespace-nowrap text-gray-900'>
@@ -55,7 +81,7 @@ export const MyPage = () => {
 
         <h1 className='text-title1 mb-[30px] tracking-[-0.5px]'>마이 페이지</h1>
 
-        <section className='mb-[34px]'>
+        <section className='mb-[23px]'>
           <h2 className='text-label1 mb-3'>내 정보</h2>
 
           <MyInfoCard name={userInfo.name} studentInfo={userInfo.studentInfo} />
@@ -64,6 +90,8 @@ export const MyPage = () => {
         <RestrictionStatusCard restrictionInfo={restrictionInfo} />
 
         <MyPageMenuList menuItems={menuItems} />
+
+        <Toast isOpen={isToastOpen} message='비밀번호가 변경되었습니다.' />
       </main>
     </div>
   );

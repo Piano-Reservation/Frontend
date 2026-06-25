@@ -16,7 +16,7 @@ function RestrictionStatusCard({restrictionInfo}: RestrictionStatusCardProps) {
   const isRestricted = restrictionInfo.status === 'restricted';
 
   return (
-    <section className='mb-[30px] overflow-hidden rounded-[14px] border border-[var(--color-blue-100)] bg-white'>
+    <section className='mb-[23px] overflow-hidden rounded-[14px] border border-[var(--color-blue-100)] bg-white'>
       <div className='flex items-center justify-between bg-[var(--color-blue-600)] px-[22px] py-[18px]'>
         <h2 className='text-title4 text-white'>이용 제한 상태</h2>
 

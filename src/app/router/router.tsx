@@ -17,19 +17,26 @@ export const router = createBrowserRouter([
     },
   },
   {
+    path: ROUTES.PASSWORD_CHANGE,
+    lazy: async () => {
+      const {PasswordChangePage} =
+        await import('@/pages/mypage/PasswordChangePage');
+      return {Component: PasswordChangePage};
+    },
+  },
+  {
+    path: ROUTES.REPORT,
+    lazy: async () => {
+      const {ReportPage} = await import('@/pages/mypage/ReportPage');
+      return {Component: ReportPage};
+    },
+  },
+  {
     element: <AppLayout />,
     children: [
       {
         path: ROUTES.HOME,
         element: <HomePage />,
-      },
-      {
-        path: ROUTES.ANNOUNCEMENT,
-        lazy: async () => {
-          const {AnnouncementPage} =
-            await import('@/pages/announcement/AnnouncementPage');
-          return {Component: AnnouncementPage};
-        },
       },
       {
         path: ROUTES.RESERVATION,
