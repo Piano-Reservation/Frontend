@@ -19,14 +19,8 @@ function CancelConfirmModal({
       <div className='w-full max-w-[320px] rounded-[24px] bg-white px-[26px] py-[24px]'>
         <div className='mb-[13px] flex items-center justify-between'>
           <div className='flex items-center gap-[7px]'>
-            <img
-              src={IcAlert}
-              alt='주의 로고'
-              className='h-[20px] w-[20px]'
-            />
-            <h2 className='text-title3 text-[#222222]'>
-              취소 유의사항
-            </h2>
+            <img src={IcAlert} alt='주의 로고' className='h-[20px] w-[20px]' />
+            <h2 className='text-title3 text-[#222222]'>취소 유의사항</h2>
           </div>
 
           <button
@@ -34,11 +28,7 @@ function CancelConfirmModal({
             aria-label='닫기'
             onClick={onClose}
             className='cursor-pointer'>
-            <img
-              src={IcX}
-              alt='닫기 로고'
-              className='h-[20px] w-[20px]'
-            />
+            <img src={IcX} alt='닫기 로고' className='h-[20px] w-[20px]' />
           </button>
         </div>
 
@@ -53,14 +43,14 @@ function CancelConfirmModal({
           <button
             type='button'
             onClick={onClose}
-            className='cursor-pointer h-[54px] rounded-[14px] bg-gray-200 text-button2 text-black'>
+            className='text-button2 h-[54px] cursor-pointer rounded-[14px] bg-gray-200 text-black'>
             취소
           </button>
 
           <button
             type='button'
             onClick={onConfirm}
-            className='cursor-pointer h-[54px] rounded-[14px] bg-[var(--color-blue-700)] text-button2 text-white'>
+            className='text-button2 h-[54px] cursor-pointer rounded-[14px] bg-[var(--color-blue-700)] text-white'>
             취소하기
           </button>
         </div>

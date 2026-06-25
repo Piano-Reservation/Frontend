@@ -17,7 +17,7 @@ const statusStyle: Record<ReservationStatus, string> = {
   cancelable: 'bg-[#E32d30]/20 text-[#ae1a1d]',
 };
 
-function StatusBadge({ status, onClick }: StatusBadgeProps) {
+function StatusBadge({status, onClick}: StatusBadgeProps) {
   const className = `text-body3 min-w-[76px] rounded-full px-3 py-1.5 text-center ${
     onClick ? 'cursor-pointer' : 'cursor-default'
   } ${statusStyle[status]}`;

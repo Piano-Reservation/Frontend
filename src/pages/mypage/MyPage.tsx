@@ -53,17 +53,12 @@ export const MyPage = () => {
           </div>
         </header>
 
-        <h1 className='text-title1 mb-[30px] tracking-[-0.5px]'>
-          마이 페이지
-        </h1>
+        <h1 className='text-title1 mb-[30px] tracking-[-0.5px]'>마이 페이지</h1>
 
         <section className='mb-[34px]'>
           <h2 className='text-label1 mb-3'>내 정보</h2>
 
-          <MyInfoCard
-            name={userInfo.name}
-            studentInfo={userInfo.studentInfo}
-          />
+          <MyInfoCard name={userInfo.name} studentInfo={userInfo.studentInfo} />
         </section>
 
         <RestrictionStatusCard restrictionInfo={restrictionInfo} />

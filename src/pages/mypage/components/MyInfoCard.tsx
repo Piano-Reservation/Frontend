@@ -3,7 +3,7 @@ interface MyInfoCardProps {
   studentInfo: string;
 }
 
-function MyInfoCard({ name, studentInfo }: MyInfoCardProps) {
+function MyInfoCard({name, studentInfo}: MyInfoCardProps) {
   return (
     <div className='flex items-center gap-[18px] rounded-[12px] border border-[var(--color-blue-100)] bg-white px-[20px] py-[20px]'>
       <div className='h-[65px] w-[65px] shrink-0 rounded-full bg-[#D1D2D4]' />

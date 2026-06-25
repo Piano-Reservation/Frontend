@@ -38,9 +38,7 @@ function TodayReservationCard({
               key={reservation.id}
               className='flex min-h-[54px] items-center justify-between rounded-xl bg-white px-[17px]'>
               <div className='flex items-center gap-[18px]'>
-                <strong className='text-label1'>
-                  {reservation.room}
-                </strong>
+                <strong className='text-label1'>{reservation.room}</strong>
                 <span className='text-body2 text-[#515151]'>
                   {reservation.time}
                 </span>

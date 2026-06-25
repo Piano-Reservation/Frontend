@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import {useState} from 'react';
 
 import IcGachon from '@/shared/assets/svg/ic-gachon.svg';
 import TodayReservationCard, {
@@ -50,7 +50,7 @@ const historyData: History[] = [
 
 export const MyReservationPage = () => {
   const [todayReservations, setTodayReservations] = useState<Reservation[]>(
-    initialTodayReservations,
+    initialTodayReservations
   );
   const [selectedReservation, setSelectedReservation] =
     useState<Reservation | null>(null);
@@ -71,7 +71,7 @@ export const MyReservationPage = () => {
     if (!selectedReservation) return;
 
     setTodayReservations((prev) =>
-      prev.filter((reservation) => reservation.id !== selectedReservation.id),
+      prev.filter((reservation) => reservation.id !== selectedReservation.id)
     );
 
     setIsCancelModalOpen(false);
