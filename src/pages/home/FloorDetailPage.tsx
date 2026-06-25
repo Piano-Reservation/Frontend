@@ -4,6 +4,7 @@ import {useNavigate, useParams} from 'react-router';
 import {IcSvgChevronLeft} from '@/shared/icons';
 import {ROUTES} from '@/shared/constants/routes';
 import {cn} from '@/shared/utils/cn';
+import {Modal, useModal} from '@/shared/components';
 import {useToast} from '@/shared/components/toast/ToastContext';
 import ReservationTimeline from '@/pages/home/components/ReservationTimeline';
 import {
@@ -21,9 +22,15 @@ const FloorDetailPage = () => {
   const navigate = useNavigate();
   const {floor = ''} = useParams<{floor: string}>();
   const {showToast} = useToast();
+  const {isOpen, open, close} = useModal();
   const [selectedRoom, setSelectedRoom] = useState<string | null>(null);
-
   const [selectedHours, setSelectedHours] = useState<number[]>([]);
+
+  const handleConfirmReservation = () => {
+    close();
+    showToast({variant: 'success', message: '예약이 완료되었습니다.'});
+    navigate(ROUTES.HOME, {state: {tab: '예약 현황'}});
+  };
 
   const floorValue = parseFloor(floor);
   const rooms = ROOMS_BY_FLOOR[floorValue] ?? [];
@@ -87,14 +94,25 @@ const FloorDetailPage = () => {
         <button
           type='button'
           disabled={!selectedRoom}
-          onClick={() => {
-            showToast({variant: 'success', message: '예약이 완료되었습니다.'});
-            navigate(ROUTES.RESERVATION);
-          }}
+          onClick={open}
           className='bg-action-primary text-button1 h-12 w-full rounded-xl tracking-[0.54px] text-white disabled:opacity-40'>
           예약하기
         </button>
       </div>
+
+      <Modal
+        isOpen={isOpen}
+        title='예약 및 유의사항'
+        confirmText='예약하기'
+        cancelText='취소'
+        onConfirm={handleConfirmReservation}
+        onClose={close}>
+        <p>
+          · 3층 연습실은 한 연습실에 최대 2시간, 일일 최대 6시간까지 예약 가능
+        </p>
+        <p>· 오후 연습실은 본인 전공실에 맞춰 신청</p>
+        <p>· 당일 오후 13:00 이후부터는 학년 구분 없이 사용 가능</p>
+      </Modal>
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {useNavigate} from 'react-router';
+import {useLocation, useNavigate} from 'react-router';
 
 import {BottomNavigation, Header} from '@/shared/components';
 import {createPath} from '@/shared/constants/routes';
@@ -11,7 +11,10 @@ import {FLOORS, type FloorValue} from '@/pages/home/constants/home';
 
 export function HomePage() {
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState<HomeMenuTab>('예약하기');
+  const location = useLocation();
+  const initialTab =
+    (location.state as {tab?: HomeMenuTab} | null)?.tab ?? '예약하기';
+  const [activeTab, setActiveTab] = useState<HomeMenuTab>(initialTab);
 
   const handleFloorClick = (floor: FloorValue) => {
     navigate(createPath.floorDetail(floor));
