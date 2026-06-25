@@ -7,7 +7,7 @@ import PasswordField from './components/PasswordField';
 
 const PASSWORD_REGEX =
   /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).{8,16}$/;
-const CURRENT_PASSWORD = '000000';
+const CURRENT_PASSWORD = '000000'; // ⚠️ 임시 목업임 -> api 연동 시 제거
 
 export const PasswordChangePage = () => {
   const navigate = useNavigate();
@@ -30,13 +30,6 @@ export const PasswordChangePage = () => {
 
   const handleSubmit = () => {
     if (isSubmitDisabled) return;
-
-    // TODO: 비밀번호 수정 API 연결
-    console.log({
-      currentPassword,
-      newPassword,
-      newPasswordConfirm,
-    });
 
     navigate(ROUTES.MY_PAGE, {
       replace: true,
@@ -68,9 +61,7 @@ export const PasswordChangePage = () => {
             label='현재 비밀번호'
             value={currentPassword}
             onChange={(event) => setCurrentPassword(event.target.value)}
-            isInvalid={
-              currentPassword.length > 0 && !isCurrentPasswordValid
-            }
+            isInvalid={currentPassword.length > 0 && !isCurrentPasswordValid}
             className='mb-[18px]'>
             {currentPassword && !isCurrentPasswordValid && (
               <p className='text-caption5 mt-[10px] text-[var(--color-red-600)]'>
@@ -98,9 +89,7 @@ export const PasswordChangePage = () => {
             label='새 비밀번호 확인'
             value={newPasswordConfirm}
             onChange={(event) => setNewPasswordConfirm(event.target.value)}
-            isInvalid={
-              newPasswordConfirm.length > 0 && !isPasswordMatched
-            }>
+            isInvalid={newPasswordConfirm.length > 0 && !isPasswordMatched}>
             {newPasswordConfirm && !isPasswordMatched && (
               <p className='text-caption5 mt-[10px] text-[var(--color-red-600)]'>
                 새 비밀번호가 일치하지 않습니다.

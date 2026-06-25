@@ -21,9 +21,7 @@ const PasswordField = ({
 }: PasswordFieldProps) => {
   return (
     <div className={className}>
-      <label
-        htmlFor={id}
-        className='text-body1 mb-[10px] block text-[#222222]'>
+      <label htmlFor={id} className='text-body1 mb-[10px] block text-[#222222]'>
         {label}
       </label>
 
