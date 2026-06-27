@@ -1,7 +1,7 @@
-import type { AxiosInstance } from "axios";
-import { publicInstance } from "@/shared/api/axios";
-import type z from "zod";
-import { createApiSuccessSchema } from "@/shared/api/response-schema";
+import type {AxiosInstance} from 'axios';
+import {publicInstance} from '@/shared/api/axios';
+import type z from 'zod';
+import {createApiSuccessSchema} from '@/shared/api/response-schema';
 
 export const http = {
   get: async <T>(

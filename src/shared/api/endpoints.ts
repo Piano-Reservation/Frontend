@@ -8,7 +8,7 @@ export const API_ENDPOINTS = {
     CREATE: '/api/reservations',
     AVAILABILITY: '/api/reservations/availability',
     CANCEL: (reservationId: number) => `/api/reservations/${reservationId}`,
-  }, 
+  },
   AUTH: '/api/auth',
   NOTIFICATION: {
     LIST: '/api/notifications',
