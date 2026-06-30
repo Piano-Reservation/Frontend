@@ -1,32 +1,29 @@
 import {type FormEvent, useState} from 'react';
 
-import {useNavigate} from 'react-router';
-
 import AuthLayout from '@/app/layout/AuthLayout';
 import {Button, Input} from '@/shared/components';
-import {ROUTES} from '@/shared/constants/routes';
+import {useLogin} from '@/pages/login/hooks/useLogin';
 
 const LoginPage = () => {
-  const navigate = useNavigate();
-  const [employeeId, setEmployeeId] = useState('');
+  const [studentNumber, setStudentNumber] = useState('');
   const [password, setPassword] = useState('');
+  const {mutate: login, isPending} = useLogin();
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // TODO: 로그인 API 연동
-    navigate(ROUTES.HOME);
+    login({studentNumber, password});
   };
 
   return (
     <AuthLayout>
       <form className='flex w-full flex-col gap-5' onSubmit={handleSubmit}>
         <Input
-          id='employee-id'
+          id='student-number'
           label='아이디(사번)'
           placeholder='사번을 입력하세요'
           inputMode='numeric'
-          value={employeeId}
-          onChange={(e) => setEmployeeId(e.target.value.replace(/\D/g, ''))}
+          value={studentNumber}
+          onChange={(e) => setStudentNumber(e.target.value.replace(/\D/g, ''))}
           autoComplete='username'
           fullWidth
         />
@@ -43,7 +40,7 @@ const LoginPage = () => {
           autoComplete='current-password'
           fullWidth
         />
-        <Button type='submit' fullWidth>
+        <Button type='submit' isLoading={isPending} fullWidth>
           로그인
         </Button>
       </form>

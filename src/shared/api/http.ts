@@ -13,4 +13,15 @@ export const http = {
     const result = createApiSuccessSchema(dataSchema).parse(response.data);
     return result.data as T;
   },
+
+  post: async <T>(
+    url: string,
+    body: unknown,
+    dataSchema: z.ZodType<T>,
+    instance: AxiosInstance = publicInstance
+  ): Promise<T> => {
+    const response = await instance.post(url, body);
+    const result = createApiSuccessSchema(dataSchema).parse(response.data);
+    return result.data as T;
+  },
 };
