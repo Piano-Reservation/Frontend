@@ -12,9 +12,10 @@ export const useLogin = () => {
 
   return useMutation({
     mutationFn: postLogin,
-    onSuccess: (token) => {
-      localStorage.setItem('accessToken', token);
-      navigate(ROUTES.HOME);
+    onSuccess: (message) => {
+      if (message === '성공') {
+        navigate(ROUTES.HOME);
+      }
     },
     onError: (error) => {
       if (axios.isAxiosError(error)) {

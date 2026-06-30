@@ -8,6 +8,7 @@ interface LoginRequest {
   password: string;
 }
 
-export const postLogin = (body: LoginRequest): Promise<string> => {
-  return http.post(API_ENDPOINTS.AUTH, body, z.string());
+export const postLogin = async (body: LoginRequest): Promise<string> => {
+  const {message} = await http.post(API_ENDPOINTS.AUTH, body, z.null());
+  return message;
 };
