@@ -12,7 +12,6 @@ export const publicInstance = axios.create({
   },
 });
 
-
 export const privateInstance = axios.create({
   baseURL: BASE_URL,
   timeout: 10000,
