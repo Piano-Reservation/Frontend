@@ -7,9 +7,10 @@ import {cn} from '@/shared/utils/cn';
 import {Modal, useModal} from '@/shared/components';
 import {useToast} from '@/shared/components/toast/ToastContext';
 import ReservationTimeline from '@/pages/home/components/ReservationTimeline';
+import {useRoomList} from '@/pages/home/hooks/useRoomList';
 import {
+  FLOOR_TO_API_VALUE,
   MOCK_SLOTS,
-  ROOMS_BY_FLOOR,
   type FloorValue,
 } from '@/pages/home/constants/home';
 
@@ -23,7 +24,7 @@ const FloorDetailPage = () => {
   const {floor = ''} = useParams<{floor: string}>();
   const {showToast} = useToast();
   const {isOpen, open, close} = useModal();
-  const [selectedRoom, setSelectedRoom] = useState<string | null>(null);
+  const [selectedRoom, setSelectedRoom] = useState<number | null>(null);
   const [selectedHours, setSelectedHours] = useState<number[]>([]);
 
   const handleConfirmReservation = () => {
@@ -33,7 +34,7 @@ const FloorDetailPage = () => {
   };
 
   const floorValue = parseFloor(floor);
-  const rooms = ROOMS_BY_FLOOR[floorValue] ?? [];
+  const {data: rooms = []} = useRoomList(FLOOR_TO_API_VALUE[floorValue]);
 
   const handleToggleHour = (hour: number) => {
     setSelectedHours((prev) =>
@@ -58,16 +59,16 @@ const FloorDetailPage = () => {
             <div className='flex flex-col gap-3'>
               {rooms.map((room) => (
                 <button
-                  key={room}
+                  key={room.roomId}
                   type='button'
-                  onClick={() => setSelectedRoom(room)}
+                  onClick={() => setSelectedRoom(room.roomId)}
                   className={cn(
                     'text-button4 w-60 overflow-hidden rounded-lg p-3 text-left tracking-[-0.24px]',
-                    selectedRoom === room
+                    selectedRoom === room.roomId
                       ? 'bg-action-primary text-white'
                       : 'bg-bg-surface border-border-default text-text-body border'
                   )}>
-                  {room}
+                  {room.name}
                 </button>
               ))}
             </div>

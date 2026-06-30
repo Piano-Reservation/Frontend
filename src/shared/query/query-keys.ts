@@ -3,7 +3,7 @@ export const QUERY_KEYS = {
     ME: ['user', 'me'] as const,
   },
   ROOM: {
-    LIST: ['room', 'list'] as const,
+    LIST: (floor: number) => ['room', 'list', floor] as const,
   },
   RESERVATION: {
     AVAILABILITY: (date: string) =>

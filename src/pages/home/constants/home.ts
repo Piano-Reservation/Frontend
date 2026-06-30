@@ -6,6 +6,12 @@ export const DAYS = ['일', '월', '화', '수', '목', '금', '토'] as const;
 export const FLOORS = [3, 1, 'B1'] as const;
 export type FloorValue = (typeof FLOORS)[number];
 
+export const FLOOR_TO_API_VALUE: Record<FloorValue, number> = {
+  3: 3,
+  1: 1,
+  B1: 0,
+};
+
 export const NOTICE_ALERT = '대리 예약 적발 시, 한 학기 연습실 정지';
 
 export const NOTICES = [
