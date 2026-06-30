@@ -12,28 +12,22 @@ export const useLogin = () => {
 
   return useMutation({
     mutationFn: postLogin,
-    onSuccess: (message) => {
-      if (message === '성공') {
-        navigate(ROUTES.HOME);
-      }
+    onSuccess: () => {
+      navigate(ROUTES.HOME);
     },
     onError: (error) => {
+      let message = '로그인 중 오류가 발생했습니다.';
+
       if (axios.isAxiosError(error)) {
         const status = error.response?.status;
         if (status === 401) {
-          showToast({
-            variant: 'error',
-            message: '학번 또는 비밀번호가 일치하지 않습니다.',
-          });
+          message = '학번 또는 비밀번호가 일치하지 않습니다.';
         } else if (status === 403) {
-          showToast({variant: 'error', message: '이용이 제한된 계정입니다.'});
-        } else {
-          showToast({
-            variant: 'error',
-            message: '로그인 중 오류가 발생했습니다.',
-          });
+          message = '이용이 제한된 계정입니다.';
         }
       }
+
+      showToast({variant: 'error', message});
     },
   });
 };
