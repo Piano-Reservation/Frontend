@@ -15,8 +15,7 @@ export const apiErrorSchema = z.object({
 
 export const createApiSuccessSchema = <T>(dataSchema: z.ZodType<T>) =>
   z.object({
-    success: z.literal(true),
-    status: z.number(),
+    code: z.number(),
     message: z.string(),
     data: dataSchema,
   });
