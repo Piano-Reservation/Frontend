@@ -1,4 +1,5 @@
 import {useState} from 'react';
+import axios from 'axios';
 import {useNavigate, useParams} from 'react-router';
 
 import {IcSvgChevronLeft} from '@/shared/icons';
@@ -50,9 +51,13 @@ const FloorDetailPage = () => {
           showToast({variant: 'success', message: '예약이 완료되었습니다.'});
           navigate(ROUTES.HOME, {state: {tab: '예약 현황'}});
         },
-        onError: () => {
+        onError: (error) => {
           close();
-          showToast({variant: 'error', message: '예약에 실패했습니다.'});
+          const message =
+            axios.isAxiosError(error) && error.response?.data?.message
+              ? error.response.data.message
+              : '예약에 실패했습니다.';
+          showToast({variant: 'error', message});
         },
       }
     );
