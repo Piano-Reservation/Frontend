@@ -30,7 +30,7 @@ const FloorDetailPage = () => {
   const [selectedHours, setSelectedHours] = useState<number[]>([]);
 
   const {data: availability} = useRoomAvailability(selectedRoom);
-  const {mutate: createReservation} = useCreateReservation();
+  const {mutate: createReservation, isPending} = useCreateReservation();
 
   const timeSlots: TimeSlot[] =
     availability?.slots.map((slot) => ({
@@ -39,7 +39,10 @@ const FloorDetailPage = () => {
     })) ?? [];
 
   const handleConfirmReservation = () => {
-    if (!selectedRoom || selectedHours.length === 0) return;
+    if (!selectedRoom || selectedHours.length === 0 || isPending) return;
+
+    const sorted = [...selectedHours].sort((a, b) => a - b);
+    if (sorted.some((h, i) => i > 0 && h !== sorted[i - 1] + 1)) return;
 
     const {date, startTime, endTime} = hoursToReservationTime(selectedHours);
 
@@ -67,9 +70,19 @@ const FloorDetailPage = () => {
   const {data: rooms = []} = useRoomList(FLOOR_TO_API_VALUE[floorValue]);
 
   const handleToggleHour = (hour: number) => {
-    setSelectedHours((prev) =>
-      prev.includes(hour) ? prev.filter((h) => h !== hour) : [...prev, hour]
-    );
+    setSelectedHours((prev) => {
+      if (prev.includes(hour)) {
+        const min = Math.min(...prev);
+        const max = Math.max(...prev);
+        if (hour !== min && hour !== max) return prev;
+        return prev.filter((h) => h !== hour);
+      }
+      if (prev.length === 0) return [hour];
+      const min = Math.min(...prev);
+      const max = Math.max(...prev);
+      if (hour !== min - 1 && hour !== max + 1) return prev;
+      return [...prev, hour];
+    });
   };
 
   return (
@@ -147,6 +160,7 @@ const FloorDetailPage = () => {
         title='예약 및 유의사항'
         confirmText='예약하기'
         cancelText='취소'
+        confirmDisabled={isPending}
         onConfirm={handleConfirmReservation}
         onClose={close}>
         <p>

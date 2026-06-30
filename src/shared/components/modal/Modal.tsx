@@ -9,6 +9,7 @@ interface ModalProps {
   children: ReactNode;
   confirmText?: string;
   cancelText?: string;
+  confirmDisabled?: boolean;
   onConfirm: () => void;
   onCancel?: () => void;
   onClose: () => void;
@@ -30,6 +31,7 @@ const Modal = ({
   children,
   confirmText = '선택',
   cancelText = '취소',
+  confirmDisabled = false,
   onConfirm,
   onCancel,
   onClose,
@@ -129,8 +131,9 @@ const Modal = ({
             {cancelText}
           </button>
           <button
-            className='text-button2 bg-action-primary hover:bg-action-primary-hover h-10 flex-1 cursor-pointer rounded-xl text-white transition-colors'
+            className='text-button2 bg-action-primary hover:bg-action-primary-hover h-10 flex-1 cursor-pointer rounded-xl text-white transition-colors disabled:opacity-40'
             type='button'
+            disabled={confirmDisabled}
             onClick={onConfirm}>
             {confirmText}
           </button>
