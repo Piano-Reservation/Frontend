@@ -6,15 +6,14 @@ import {ROUTES} from '@/shared/constants/routes';
 import {cn} from '@/shared/utils/cn';
 import {Modal, useModal} from '@/shared/components';
 import {useToast} from '@/shared/components/toast/ToastContext';
-import ReservationTimeline from '@/pages/home/components/ReservationTimeline';
+import ReservationTimeline, {
+  type TimeSlot,
+} from '@/pages/home/components/ReservationTimeline';
 import {useRoomList} from '@/pages/home/hooks/useRoomList';
+import {useRoomAvailability} from '@/pages/home/hooks/useRoomAvailability';
 import {useCreateReservation} from '@/pages/home/hooks/useCreateReservation';
 import {hoursToReservationTime} from '@/pages/home/utils/reservationTime';
-import {
-  FLOOR_TO_API_VALUE,
-  MOCK_SLOTS,
-  type FloorValue,
-} from '@/pages/home/constants/home';
+import {FLOOR_TO_API_VALUE, type FloorValue} from '@/pages/home/constants/home';
 
 const getFloorLabel = (floor: string) => `${floor}층`;
 
@@ -29,7 +28,14 @@ const FloorDetailPage = () => {
   const [selectedRoom, setSelectedRoom] = useState<number | null>(null);
   const [selectedHours, setSelectedHours] = useState<number[]>([]);
 
+  const {data: availability} = useRoomAvailability(selectedRoom);
   const {mutate: createReservation} = useCreateReservation();
+
+  const timeSlots: TimeSlot[] =
+    availability?.slots.map((slot) => ({
+      hour: parseInt(slot.startTime.split(':')[0], 10),
+      status: slot.status === 'AVAILABLE' ? 'available' : 'booked',
+    })) ?? [];
 
   const handleConfirmReservation = () => {
     if (!selectedRoom || selectedHours.length === 0) return;
@@ -73,14 +79,17 @@ const FloorDetailPage = () => {
           </h1>
         </div>
 
-        <div className='flex items-start justify-between'>
+        <div className='flex flex-1 items-start justify-between'>
           <div className='flex flex-col justify-between self-stretch'>
             <div className='flex flex-col gap-3'>
               {rooms.map((room) => (
                 <button
                   key={room.roomId}
                   type='button'
-                  onClick={() => setSelectedRoom(room.roomId)}
+                  onClick={() => {
+                    setSelectedRoom(room.roomId);
+                    setSelectedHours([]);
+                  }}
                   className={cn(
                     'text-button4 w-60 overflow-hidden rounded-lg p-3 text-left tracking-[-0.24px]',
                     selectedRoom === room.roomId
@@ -104,11 +113,17 @@ const FloorDetailPage = () => {
             </div>
           </div>
 
-          <ReservationTimeline
-            slots={MOCK_SLOTS}
-            selectedHours={selectedHours}
-            onToggleHour={handleToggleHour}
-          />
+          {selectedRoom === null ? (
+            <p className='text-caption5 flex h-100 w-32 items-center justify-center rounded-md bg-gray-200 text-gray-600'>
+              연습실을 선택해주세요
+            </p>
+          ) : (
+            <ReservationTimeline
+              slots={timeSlots}
+              selectedHours={selectedHours}
+              onToggleHour={handleToggleHour}
+            />
+          )}
         </div>
       </main>
 

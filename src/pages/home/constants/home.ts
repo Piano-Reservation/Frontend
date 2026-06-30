@@ -1,6 +1,3 @@
-import {type TimeSlot} from '@/pages/home/components/ReservationTimeline';
-import {type StatusSlot} from '@/pages/home/components/ReservationStatusTimeline';
-
 export const DAYS = ['일', '월', '화', '수', '목', '금', '토'] as const;
 
 export const FLOORS = [3, 1, 'B1'] as const;
@@ -50,39 +47,3 @@ export const ROOMS_BY_FLOOR: Record<FloorValue, string[]> = {
     '예술체육대학B1-6호',
   ],
 };
-
-export const MOCK_SLOTS: TimeSlot[] = [
-  {hour: 9, status: 'available'},
-  {hour: 10, status: 'available'},
-  {hour: 11, status: 'available'},
-  {hour: 12, status: 'available'},
-  {hour: 13, status: 'available'},
-  {hour: 14, status: 'available'},
-  {hour: 15, status: 'available'},
-  {hour: 16, status: 'available'},
-  {hour: 17, status: 'booked'},
-  {hour: 18, status: 'booked'},
-  {hour: 19, status: 'available'},
-  {hour: 20, status: 'available'},
-  {hour: 21, status: 'available'},
-  {hour: 22, status: 'available'},
-  {hour: 23, status: 'available'},
-];
-
-export const MOCK_STATUS_SLOTS: StatusSlot[] = [
-  {hour: 9, bookedBy: null},
-  {hour: 10, bookedBy: '정예지'},
-  {hour: 11, bookedBy: '정예지'},
-  {hour: 12, bookedBy: '이지은'},
-  {hour: 13, bookedBy: '이지은'},
-  {hour: 14, bookedBy: '홍길동'},
-  {hour: 15, bookedBy: '홍길동'},
-  {hour: 16, bookedBy: '박지민'},
-  {hour: 17, bookedBy: '오가연', isMine: true},
-  {hour: 18, bookedBy: '오가연', isMine: true},
-  {hour: 19, bookedBy: null},
-  {hour: 20, bookedBy: null},
-  {hour: 21, bookedBy: null},
-  {hour: 22, bookedBy: null},
-  {hour: 23, bookedBy: null},
-];
