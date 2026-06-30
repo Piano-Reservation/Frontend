@@ -8,6 +8,8 @@ import {Modal, useModal} from '@/shared/components';
 import {useToast} from '@/shared/components/toast/ToastContext';
 import ReservationTimeline from '@/pages/home/components/ReservationTimeline';
 import {useRoomList} from '@/pages/home/hooks/useRoomList';
+import {useCreateReservation} from '@/pages/home/hooks/useCreateReservation';
+import {hoursToReservationTime} from '@/pages/home/utils/reservationTime';
 import {
   FLOOR_TO_API_VALUE,
   MOCK_SLOTS,
@@ -27,10 +29,27 @@ const FloorDetailPage = () => {
   const [selectedRoom, setSelectedRoom] = useState<number | null>(null);
   const [selectedHours, setSelectedHours] = useState<number[]>([]);
 
+  const {mutate: createReservation} = useCreateReservation();
+
   const handleConfirmReservation = () => {
-    close();
-    showToast({variant: 'success', message: '예약이 완료되었습니다.'});
-    navigate(ROUTES.HOME, {state: {tab: '예약 현황'}});
+    if (!selectedRoom || selectedHours.length === 0) return;
+
+    const {date, startTime, endTime} = hoursToReservationTime(selectedHours);
+
+    createReservation(
+      {roomId: selectedRoom, date, startTime, endTime},
+      {
+        onSuccess: () => {
+          close();
+          showToast({variant: 'success', message: '예약이 완료되었습니다.'});
+          navigate(ROUTES.HOME, {state: {tab: '예약 현황'}});
+        },
+        onError: () => {
+          close();
+          showToast({variant: 'error', message: '예약에 실패했습니다.'});
+        },
+      }
+    );
   };
 
   const floorValue = parseFloor(floor);
