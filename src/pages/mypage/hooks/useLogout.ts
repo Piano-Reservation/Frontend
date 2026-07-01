@@ -1,4 +1,4 @@
-import {useMutation} from '@tanstack/react-query';
+import {useMutation, useQueryClient} from '@tanstack/react-query';
 import axios from 'axios';
 import {useNavigate} from 'react-router';
 
@@ -9,11 +9,13 @@ import {ROUTES} from '@/shared/constants/routes';
 export const useLogout = () => {
   const navigate = useNavigate();
   const {showToast} = useToast();
+  const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: logout,
     onSuccess: () => {
       localStorage.removeItem('accessToken');
+      queryClient.clear();
       navigate(ROUTES.LOGIN, {replace: true});
     },
     onError: (error) => {

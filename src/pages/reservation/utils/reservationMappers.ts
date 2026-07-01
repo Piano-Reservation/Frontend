@@ -33,12 +33,28 @@ interface HistoryEntry {
   item: HistoryItem;
 }
 
+interface OccupancyItem {
+  room: string;
+  time: string;
+  status: 'completed' | 'active';
+}
+
+const toReservationTimeText = (
+  reservation: Pick<MyReservation, 'startTime' | 'endTime'>
+) => `${reservation.startTime.slice(0, 5)}-${reservation.endTime.slice(0, 5)}`;
+
 const getOccupancyTime = (occupancy: BasementOccupancy) => {
   const startTime = occupancy.enteredAt.slice(11, 16);
   const endTime = occupancy.exitedAt?.slice(11, 16) ?? '이용 중';
 
   return `${startTime}-${endTime}`;
 };
+
+const toOccupancyItem = (occupancy: BasementOccupancy): OccupancyItem => ({
+  room: `${occupancy.roomCode}호`,
+  time: getOccupancyTime(occupancy),
+  status: occupancy.status === 'EXITED' ? 'completed' : 'active',
+});
 
 const groupHistoryEntries = (entries: HistoryEntry[]): History[] => {
   const groupedEntries = new Map<string, HistoryEntry[]>();
@@ -70,16 +86,14 @@ export const mapTodayReservations = (
   const reservationItems: Reservation[] = reservations.map((reservation) => ({
     id: reservation.reservationId,
     room: `${reservation.roomCode}호`,
-    time: `${reservation.startTime.slice(0, 5)}-${reservation.endTime.slice(0, 5)}`,
+    time: toReservationTimeText(reservation),
     status: STATUS_MAP[reservation.status],
   }));
   const basementItems: Reservation[] = occupancies
     .filter((occupancy) => occupancy.enteredAt.slice(0, 10) === date)
     .map((occupancy) => ({
       id: -occupancy.occupancyId,
-      room: `${occupancy.roomCode}호`,
-      time: getOccupancyTime(occupancy),
-      status: occupancy.status === 'EXITED' ? 'completed' : 'active',
+      ...toOccupancyItem(occupancy),
     }));
 
   return [...reservationItems, ...basementItems].sort(
@@ -100,7 +114,7 @@ export const mapHistoryRecords = (
       item: {
         id: `reservation-${reservation.reservationId}`,
         room: `${reservation.roomCode}호`,
-        time: `${reservation.startTime.slice(0, 5)}-${reservation.endTime.slice(0, 5)}`,
+        time: toReservationTimeText(reservation),
         status: HISTORY_STATUS_MAP[reservation.status],
       },
     })
@@ -112,9 +126,7 @@ export const mapHistoryRecords = (
       sortTime: occupancy.enteredAt.slice(11),
       item: {
         id: `basement-${occupancy.occupancyId}`,
-        room: `${occupancy.roomCode}호`,
-        time: getOccupancyTime(occupancy),
-        status: occupancy.status === 'EXITED' ? 'completed' : 'active',
+        ...toOccupancyItem(occupancy),
       },
     }));
 

@@ -6,7 +6,7 @@ import CancelConfirmModal from './components/CancelConfirmModal';
 import {useMyReservationPageData} from './hooks/useMyReservationPageData';
 import {useReservationCancelFlow} from './hooks/useReservationCancelFlow';
 
-export const MyReservationPage = () => {
+const MyReservationPage = () => {
   const pageData = useMyReservationPageData();
   const cancelFlow = useReservationCancelFlow(pageData.queryDate);
 
@@ -63,3 +63,5 @@ export const MyReservationPage = () => {
     </div>
   );
 };
+
+export default MyReservationPage;
