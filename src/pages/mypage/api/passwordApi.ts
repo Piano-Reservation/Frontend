@@ -6,7 +6,7 @@ import {createApiSuccessSchema} from '@/shared/api/response-schema';
 import {
   passwordChangeRequestSchema,
   type PasswordChangeRequest,
-} from './types/password';
+} from '@/pages/mypage/api/types/password';
 
 const passwordChangeResponseSchema = createApiSuccessSchema(
   z.string().nullable()

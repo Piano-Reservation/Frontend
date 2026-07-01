@@ -269,8 +269,8 @@ export const MyReservationPage = () => {
           <TodayReservationCard
             dateText={formatDateText(today)}
             reservations={todayReservations}
-            isLoading={isReservationsLoading && basementHistoryQuery.isPending}
-            isError={isReservationsError && basementHistoryQuery.isError}
+            isLoading={isReservationsLoading || basementHistoryQuery.isPending}
+            isError={isReservationsError || basementHistoryQuery.isError}
             onCancelClick={handleOpenCancelModal}
           />
         </section>

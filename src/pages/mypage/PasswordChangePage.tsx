@@ -6,8 +6,10 @@ import IcLeft from '@/shared/assets/svg/ic-chevron-left.svg';
 import Input from '@/shared/components/input/Input';
 import {useToast} from '@/shared/components';
 import {ROUTES} from '@/shared/constants/routes';
-import {passwordChangeRequestSchema} from './api/types/password';
-import {useChangePassword} from './hooks/useChangePassword';
+import {passwordChangeRequestSchema} from '@/pages/mypage/api/types/password';
+import {useChangePassword} from '@/pages/mypage/hooks/useChangePassword';
+
+const INVALID_CURRENT_PASSWORD_CODE = 2002;
 
 export const PasswordChangePage = () => {
   const navigate = useNavigate();
@@ -53,11 +55,12 @@ export const PasswordChangePage = () => {
 
           if (axios.isAxiosError(error)) {
             const responseMessage = error.response?.data?.message;
+            const responseCode = error.response?.data?.code;
             if (typeof responseMessage === 'string') {
               message = responseMessage;
             }
 
-            if (error.response?.status === 400) {
+            if (responseCode === INVALID_CURRENT_PASSWORD_CODE) {
               setCurrentPasswordError(message);
               return;
             }
