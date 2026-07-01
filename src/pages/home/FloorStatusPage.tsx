@@ -103,7 +103,7 @@ const FloorStatusPage = () => {
                 'flex h-72 w-23.5 flex-col items-center justify-center rounded-lg',
                 selectedBasementStatus?.occupied
                   ? 'bg-secondary'
-                  : 'border-action-primary bg-white text-action-primary border'
+                  : 'border-action-primary text-action-primary border bg-white'
               )}>
               <span
                 className={cn(
@@ -115,7 +115,7 @@ const FloorStatusPage = () => {
                 {selectedBasementStatus?.occupied ? '사용 중' : '사용 가능'}
               </span>
               {selectedBasementStatus?.occupied && (
-                <div className='text-caption5 text-black mt-3 flex flex-col items-center gap-1'>
+                <div className='text-caption5 mt-3 flex flex-col items-center gap-1 text-black'>
                   <span>{selectedBasementStatus.occupantName}</span>
                   {basementEnteredAt && <span>{basementEnteredAt} 입실</span>}
                 </div>

@@ -139,9 +139,7 @@ const FloorDetailPage = () => {
         <div
           className={cn(
             'flex items-stretch',
-            isBasementFloor
-              ? 'flex-1 justify-center'
-              : 'justify-between'
+            isBasementFloor ? 'flex-1 justify-center' : 'justify-between'
           )}>
           <div
             className={cn(
@@ -170,7 +168,9 @@ const FloorDetailPage = () => {
               ))}
             </div>
 
-            {!isBasementFloor && <ReservationLegendCard variant='reservation' />}
+            {!isBasementFloor && (
+              <ReservationLegendCard variant='reservation' />
+            )}
           </div>
 
           {selectedRoom === null && !isBasementFloor ? (
