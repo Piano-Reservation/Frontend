@@ -53,8 +53,8 @@ export const useMyReservationPageData = () => {
     queryDate,
     dateText: formatDateText(today),
     todayReservations,
-    isTodayLoading: todayQuery.isPending && basementHistoryQuery.isPending,
-    isTodayError: todayQuery.isError && basementHistoryQuery.isError,
+    isTodayLoading: todayQuery.isPending || basementHistoryQuery.isPending,
+    isTodayError: todayQuery.isError || basementHistoryQuery.isError,
     histories,
     isHistoryLoading:
       reservationHistoryQuery.isPending || basementHistoryQuery.isPending,
