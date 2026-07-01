@@ -12,6 +12,7 @@ import {
   mapTodayReservations,
 } from '../utils/reservationMappers';
 import type {BasementOccupancy} from '../api/types/basementOccupancy';
+import {getCurrentDate} from '@/shared/utils/date';
 
 const GRADE_LABELS = {
   FRESHMAN: '1학년',
@@ -23,7 +24,7 @@ const GRADE_LABELS = {
 const EMPTY_BASEMENT_HISTORY: BasementOccupancy[] = [];
 
 export const useMyReservationPageData = () => {
-  const [today] = useState(() => new Date());
+  const [today] = useState(() => getCurrentDate());
   const queryDate = formatLocalDate(today);
   const todayQuery = useTodayReservations(queryDate);
   const reservationHistoryQuery = useReservationHistory();
