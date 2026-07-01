@@ -3,22 +3,22 @@ import {useLocation, useNavigate} from 'react-router';
 
 import IcGachon from '@/shared/assets/svg/ic-gachon.svg';
 import Toast from '@/pages/reservation/components/Toast';
+import {ROUTES} from '@/shared/constants/routes';
+import {logout} from './api/authApi';
+import {getCurrentRestriction} from './api/restrictionApi';
+import type {CurrentRestriction} from './api/types/restriction';
+import type {Grade, UserInfo} from './api/types/user';
+import {getMyInfo} from './api/userApi';
 import MyInfoCard from './components/MyInfoCard';
 import MyPageMenuList from './components/MyPageMenuList';
 import RestrictionStatusCard from './components/RestrictionStatusCard';
 
-const userInfo = {
-  name: '이름',
-  studentInfo: '0학년/000000000',
+const GRADE_LABELS: Record<Grade, string> = {
+  FRESHMAN: '1학년',
+  SOPHOMORE: '2학년',
+  JUNIOR: '3학년',
+  SENIOR: '4학년',
 };
-
-const restrictionInfo = {
-  status: 'restricted', // normal, restricted
-  reason: '부정 예약',
-  startDate: '2026.06.20',
-  endDate: '2026.06.27',
-  remainingDays: '7일',
-} as const;
 
 const menuItems = [
   {
@@ -41,6 +41,61 @@ export const MyPage = () => {
   const [isToastOpen, setIsToastOpen] = useState(() =>
     Boolean(location.state?.isPasswordChanged)
   );
+  const [restrictionInfo, setRestrictionInfo] =
+    useState<CurrentRestriction | null>(null);
+  const [restrictionError, setRestrictionError] = useState(false);
+  const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
+  const [userInfoError, setUserInfoError] = useState(false);
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
+  const [logoutError, setLogoutError] = useState<string | null>(null);
+  const studentInfo = userInfo
+    ? `${GRADE_LABELS[userInfo.grade]}/${userInfo.studentNumber}`
+    : '';
+
+  const handleLogout = async () => {
+    if (isLoggingOut) return;
+
+    setIsLoggingOut(true);
+    setLogoutError(null);
+
+    try {
+      await logout();
+      localStorage.removeItem('accessToken');
+      navigate(ROUTES.LOGIN, {replace: true});
+    } catch (error) {
+      console.error('로그아웃에 실패했습니다.', error);
+      setLogoutError('로그아웃에 실패했습니다. 잠시 후 다시 시도해주세요.');
+      setIsLoggingOut(false);
+    }
+  };
+
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      try {
+        const currentUser = await getMyInfo();
+        setUserInfo(currentUser);
+      } catch (error) {
+        console.error('내 정보 조회에 실패했습니다.', error);
+        setUserInfoError(true);
+      }
+    };
+
+    void fetchUserInfo();
+  }, []);
+
+  useEffect(() => {
+    const fetchRestriction = async () => {
+      try {
+        const restriction = await getCurrentRestriction();
+        setRestrictionInfo(restriction);
+      } catch (error) {
+        console.error('이용 제한 상태 조회에 실패했습니다.', error);
+        setRestrictionError(true);
+      }
+    };
+
+    void fetchRestriction();
+  }, []);
 
   useEffect(() => {
     if (!location.state?.isPasswordChanged) return;
@@ -72,10 +127,18 @@ export const MyPage = () => {
           </div>
 
           <div className='text-label2 whitespace-nowrap'>
-            {userInfo.name}{' '}
-            <span className='text-caption5 text-[#999999]'>
-              ({userInfo.studentInfo})
-            </span>
+            {userInfo ? (
+              <>
+                {userInfo.name}{' '}
+                <span className='text-caption5 text-[#999999]'>
+                  ({studentInfo})
+                </span>
+              </>
+            ) : (
+              <span className='text-caption5 text-[#999999]'>
+                {userInfoError ? '내 정보 조회 실패' : '내 정보 확인 중...'}
+              </span>
+            )}
           </div>
         </header>
 
@@ -84,12 +147,43 @@ export const MyPage = () => {
         <section className='mb-[23px]'>
           <h2 className='text-label1 mb-3'>내 정보</h2>
 
-          <MyInfoCard name={userInfo.name} studentInfo={userInfo.studentInfo} />
+          <MyInfoCard
+            name={
+              userInfo?.name ?? (userInfoError ? '조회 실패' : '확인 중...')
+            }
+            studentInfo={
+              userInfo
+                ? studentInfo
+                : userInfoError
+                  ? '내 정보를 불러오지 못했습니다.'
+                  : '내 정보를 불러오고 있습니다.'
+            }
+          />
         </section>
 
-        <RestrictionStatusCard restrictionInfo={restrictionInfo} />
+        {restrictionInfo ? (
+          <RestrictionStatusCard restrictionInfo={restrictionInfo} />
+        ) : (
+          <section className='mb-[23px] overflow-hidden rounded-[14px] border border-[var(--color-blue-100)] bg-white'>
+            <div className='bg-[var(--color-blue-600)] px-[22px] py-[18px]'>
+              <h2 className='text-title4 text-white'>이용 제한 상태</h2>
+            </div>
+            <div className='flex min-h-[105px] items-center justify-center px-[22px] py-[24px]'>
+              <p className='text-label2 text-black'>
+                {restrictionError
+                  ? '이용 제한 상태를 불러오지 못했습니다.'
+                  : '이용 제한 상태를 확인하고 있습니다.'}
+              </p>
+            </div>
+          </section>
+        )}
 
-        <MyPageMenuList menuItems={menuItems} />
+        <MyPageMenuList
+          menuItems={menuItems}
+          isLoggingOut={isLoggingOut}
+          logoutError={logoutError}
+          onLogout={() => void handleLogout()}
+        />
 
         <Toast isOpen={isToastOpen} message='비밀번호가 변경되었습니다.' />
       </main>

@@ -9,9 +9,17 @@ interface MenuItem {
 
 interface MyPageMenuListProps {
   menuItems: MenuItem[];
+  isLoggingOut: boolean;
+  logoutError: string | null;
+  onLogout: () => void;
 }
 
-function MyPageMenuList({menuItems}: MyPageMenuListProps) {
+function MyPageMenuList({
+  menuItems,
+  isLoggingOut,
+  logoutError,
+  onLogout,
+}: MyPageMenuListProps) {
   const navigate = useNavigate();
 
   const handleMenuClick = (label: string) => {
@@ -39,12 +47,22 @@ function MyPageMenuList({menuItems}: MyPageMenuListProps) {
 
       <button
         type='button'
-        className='flex h-[53px] w-full cursor-pointer items-center justify-between px-[15px] text-left'>
+        onClick={onLogout}
+        disabled={isLoggingOut}
+        className='flex h-[53px] w-full cursor-pointer items-center justify-between px-[15px] text-left disabled:cursor-not-allowed disabled:opacity-60'>
         <span className='text-label1 text-[var(--color-red-600)]'>
-          로그아웃
+          {isLoggingOut ? '로그아웃 중...' : '로그아웃'}
         </span>
         <img src={IcRight} alt='다음 로고' className='h-[20px] w-[20px]' />
       </button>
+
+      {logoutError && (
+        <p
+          role='alert'
+          className='text-caption5 border-t border-[#D8DDEB] px-[15px] py-[10px] text-[var(--color-red-600)]'>
+          {logoutError}
+        </p>
+      )}
     </section>
   );
 }
