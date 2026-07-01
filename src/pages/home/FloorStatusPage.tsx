@@ -3,8 +3,11 @@ import {useNavigate, useParams} from 'react-router';
 
 import {IcSvgChevronLeft} from '@/shared/icons';
 import {cn} from '@/shared/utils/cn';
-import ReservationStatusTimeline from '@/pages/home/components/ReservationStatusTimeline';
+import ReservationStatusTimeline, {
+  type StatusSlot,
+} from '@/pages/home/components/ReservationStatusTimeline';
 import {useRoomList} from '@/pages/home/hooks/useRoomList';
+import {useRoomSchedules} from '@/pages/home/hooks/useRoomSchedules';
 import {FLOOR_TO_API_VALUE, type FloorValue} from '@/pages/home/constants/home';
 
 const getFloorLabel = (floor: string) => `${floor}층`;
@@ -18,7 +21,21 @@ const FloorStatusPage = () => {
   const [selectedRoom, setSelectedRoom] = useState<number | null>(null);
 
   const floorValue = parseFloor(floor);
-  const {data: rooms = []} = useRoomList(FLOOR_TO_API_VALUE[floorValue]);
+  const apiFloor = FLOOR_TO_API_VALUE[floorValue];
+  const isSupportedScheduleFloor = apiFloor === 1 || apiFloor === 3;
+  const {data: rooms = []} = useRoomList(apiFloor, isSupportedScheduleFloor);
+  const {data: schedules = []} = useRoomSchedules(
+    apiFloor,
+    isSupportedScheduleFloor
+  );
+  const selectedSchedule = schedules.find(
+    (schedule) => schedule.roomId === selectedRoom
+  );
+  const timeSlots: StatusSlot[] =
+    selectedSchedule?.slots.map((slot) => ({
+      hour: parseInt(slot.startTime.split(':')[0], 10),
+      status: slot.status,
+    })) ?? [];
 
   return (
     <div className='bg-bg-page flex min-h-dvh flex-col'>
@@ -59,7 +76,13 @@ const FloorStatusPage = () => {
             </div>
           </div>
 
-          <ReservationStatusTimeline slots={[]} />
+          {selectedRoom === null ? (
+            <p className='text-caption5 flex h-100 w-32 items-center justify-center rounded-md bg-gray-200 text-gray-600'>
+              연습실을 선택해주세요
+            </p>
+          ) : (
+            <ReservationStatusTimeline slots={timeSlots} />
+          )}
         </div>
       </main>
     </div>

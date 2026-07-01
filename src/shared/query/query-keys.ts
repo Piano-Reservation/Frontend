@@ -4,6 +4,8 @@ export const QUERY_KEYS = {
   },
   ROOM: {
     LIST: (floor: number) => ['room', 'list', floor] as const,
+    SCHEDULES: (floor: number, date: string) =>
+      ['room', 'schedules', floor, date] as const,
   },
   RESERVATION: {
     AVAILABILITY: (roomId: number, date: string) =>

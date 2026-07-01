@@ -17,6 +17,7 @@ export const API_ENDPOINTS = {
     READ_ALL: '/api/notifications/all',
   },
   ROOM_LIST: '/api/rooms',
+  ROOM_SCHEDULES: '/api/room-schedules',
   RESTRICTION_CURRENT: '/api/me/restrictions/current',
   MY_RESERVATION: {
     LIST: '/api/me/reservations',
