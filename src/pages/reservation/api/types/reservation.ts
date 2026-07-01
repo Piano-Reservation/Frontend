@@ -12,7 +12,7 @@ export const myReservationSchema = z.object({
   reservationId: z.number().int().positive(),
   date: z.iso.date(),
   roomId: z.number().int().positive(),
-  floor: z.number().int().positive(),
+  floor: z.number().int().nonnegative(),
   roomCode: z.string().min(1),
   roomName: z.string().min(1),
   startTime: z.iso.time(),
