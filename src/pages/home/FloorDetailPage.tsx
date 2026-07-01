@@ -15,11 +15,18 @@ import {useRoomAvailability} from '@/pages/home/hooks/useRoomAvailability';
 import {useCreateReservation} from '@/pages/home/hooks/useCreateReservation';
 import {hoursToReservationTime} from '@/pages/home/utils/reservationTime';
 import {FLOOR_TO_API_VALUE, type FloorValue} from '@/pages/home/constants/home';
+import {type AvailabilityStatus} from '@/pages/home/api/availabilityApi';
 
 const getFloorLabel = (floor: string) => `${floor}층`;
 
 const parseFloor = (floor: string): FloorValue =>
   floor === 'B1' ? 'B1' : (Number(floor) as FloorValue);
+
+const TIME_SLOT_STATUS_MAP: Record<AvailabilityStatus, TimeSlot['status']> = {
+  AVAILABLE: 'available',
+  RESERVED: 'reserved',
+  RESERVED_BY_ME: 'reservedByMe',
+};
 
 const FloorDetailPage = () => {
   const navigate = useNavigate();
@@ -35,7 +42,7 @@ const FloorDetailPage = () => {
   const timeSlots: TimeSlot[] =
     availability?.slots.map((slot) => ({
       hour: parseInt(slot.startTime.split(':')[0], 10),
-      status: slot.status === 'AVAILABLE' ? 'available' : 'booked',
+      status: TIME_SLOT_STATUS_MAP[slot.status],
     })) ?? [];
 
   const handleConfirmReservation = () => {
