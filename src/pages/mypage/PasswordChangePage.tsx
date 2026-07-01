@@ -1,40 +1,75 @@
-import IcLeft from '@/shared/assets/svg/ic-chevron-left.svg';
-
 import {useState} from 'react';
+import axios from 'axios';
 import {useNavigate} from 'react-router';
-import {ROUTES} from '@/shared/constants/routes';
-import Input from '@/shared/components/input/Input';
 
-const PASSWORD_REGEX =
-  /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).{8,16}$/;
-const CURRENT_PASSWORD = '000000'; // ⚠️ 임시 목업임 -> api 연동 시 제거
+import IcLeft from '@/shared/assets/svg/ic-chevron-left.svg';
+import Input from '@/shared/components/input/Input';
+import {useToast} from '@/shared/components';
+import {ROUTES} from '@/shared/constants/routes';
+import {passwordChangeRequestSchema} from '@/pages/mypage/api/types/password';
+import {useChangePassword} from '@/pages/mypage/hooks/useChangePassword';
+
+const INVALID_CURRENT_PASSWORD_CODE = 2002;
 
 export const PasswordChangePage = () => {
   const navigate = useNavigate();
+  const {showToast} = useToast();
+  const changePasswordMutation = useChangePassword();
 
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [newPasswordConfirm, setNewPasswordConfirm] = useState('');
+  const [currentPasswordError, setCurrentPasswordError] = useState<
+    string | null
+  >(null);
 
-  const isCurrentPasswordValid = currentPassword === CURRENT_PASSWORD;
-  const isNewPasswordValid = PASSWORD_REGEX.test(newPassword);
+  const passwordValidation =
+    passwordChangeRequestSchema.shape.newPassword.safeParse(newPassword);
+  const isNewPasswordValid = passwordValidation.success;
   const isPasswordMatched =
     newPassword.length > 0 && newPassword === newPasswordConfirm;
-
   const isSubmitDisabled =
-    !isCurrentPasswordValid ||
-    !newPassword ||
-    !newPasswordConfirm ||
+    currentPassword.length === 0 ||
     !isNewPasswordValid ||
-    !isPasswordMatched;
+    !isPasswordMatched ||
+    changePasswordMutation.isPending;
 
   const handleSubmit = () => {
     if (isSubmitDisabled) return;
 
-    navigate(ROUTES.MY_PAGE, {
-      replace: true,
-      state: {isPasswordChanged: true},
-    });
+    setCurrentPasswordError(null);
+    changePasswordMutation.mutate(
+      {currentPassword, newPassword},
+      {
+        onSuccess: (message) => {
+          localStorage.removeItem('accessToken');
+          showToast({
+            variant: 'success',
+            message:
+              message || '비밀번호가 변경되었습니다. 다시 로그인해주세요.',
+          });
+          navigate(ROUTES.LOGIN, {replace: true});
+        },
+        onError: (error) => {
+          let message = '비밀번호 변경에 실패했습니다.';
+
+          if (axios.isAxiosError(error)) {
+            const responseMessage = error.response?.data?.message;
+            const responseCode = error.response?.data?.code;
+            if (typeof responseMessage === 'string') {
+              message = responseMessage;
+            }
+
+            if (responseCode === INVALID_CURRENT_PASSWORD_CODE) {
+              setCurrentPasswordError(message);
+              return;
+            }
+          }
+
+          showToast({variant: 'error', message});
+        },
+      }
+    );
   };
 
   return (
@@ -61,12 +96,12 @@ export const PasswordChangePage = () => {
               type='password'
               label='현재 비밀번호'
               value={currentPassword}
-              onChange={(event) => setCurrentPassword(event.target.value)}
-              errorMessage={
-                currentPassword.length > 0 && !isCurrentPasswordValid
-                  ? '현재 비밀번호가 일치하지 않습니다.'
-                  : undefined
-              }
+              onChange={(event) => {
+                setCurrentPassword(event.target.value);
+                setCurrentPasswordError(null);
+              }}
+              errorMessage={currentPasswordError ?? undefined}
+              autoComplete='current-password'
               fullWidth
             />
 
@@ -77,10 +112,12 @@ export const PasswordChangePage = () => {
               onChange={(event) => setNewPassword(event.target.value)}
               errorMessage={
                 newPassword.length > 0 && !isNewPasswordValid
-                  ? '비밀번호는 8자 이상, 16자 이하여야 합니다. 영문, 숫자, 특수문자를 포함해야 합니다.'
+                  ? (passwordValidation.error?.issues[0]?.message ??
+                    '비밀번호 형식을 확인해주세요.')
                   : undefined
               }
-              helperText='비밀번호는 8자 이상, 16자 이하여야 합니다. 영문, 숫자, 특수문자를 포함해야 합니다.'
+              helperText='비밀번호는 6자 이상, 72자 이하여야 합니다.'
+              autoComplete='new-password'
               fullWidth
             />
 
@@ -94,6 +131,7 @@ export const PasswordChangePage = () => {
                   ? '새 비밀번호가 일치하지 않습니다.'
                   : undefined
               }
+              autoComplete='new-password'
               fullWidth
             />
           </div>
@@ -104,7 +142,9 @@ export const PasswordChangePage = () => {
           disabled={isSubmitDisabled}
           onClick={handleSubmit}
           className='text-button2 h-[57px] w-full cursor-pointer rounded-[12px] bg-[var(--color-blue-700)] text-white disabled:cursor-default disabled:opacity-60'>
-          변경하기
+          {changePasswordMutation.isPending
+            ? '변경 중...'
+            : '비밀번호 변경하기'}
         </button>
       </main>
     </div>

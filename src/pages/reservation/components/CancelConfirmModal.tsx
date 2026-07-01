@@ -3,12 +3,14 @@ import IcX from '@/shared/assets/svg/ic-x.svg';
 
 interface CancelConfirmModalProps {
   isOpen: boolean;
+  isPending?: boolean;
   onClose: () => void;
   onConfirm: () => void;
 }
 
 function CancelConfirmModal({
   isOpen,
+  isPending = false,
   onClose,
   onConfirm,
 }: CancelConfirmModalProps) {
@@ -34,7 +36,8 @@ function CancelConfirmModal({
             type='button'
             aria-label='닫기'
             onClick={onClose}
-            className='cursor-pointer'>
+            disabled={isPending}
+            className='cursor-pointer disabled:cursor-not-allowed disabled:opacity-60'>
             <img src={IcX} alt='닫기 로고' className='h-[20px] w-[20px]' />
           </button>
         </div>
@@ -52,15 +55,17 @@ function CancelConfirmModal({
           <button
             type='button'
             onClick={onClose}
-            className='text-button2 h-[54px] cursor-pointer rounded-[14px] bg-gray-200 text-black'>
+            disabled={isPending}
+            className='text-button2 h-[54px] cursor-pointer rounded-[14px] bg-gray-200 text-black disabled:cursor-not-allowed disabled:opacity-60'>
             취소
           </button>
 
           <button
             type='button'
             onClick={onConfirm}
-            className='text-button2 h-[54px] cursor-pointer rounded-[14px] bg-[var(--color-blue-700)] text-white'>
-            취소하기
+            disabled={isPending}
+            className='text-button2 h-[54px] cursor-pointer rounded-[14px] bg-[var(--color-blue-700)] text-white disabled:cursor-not-allowed disabled:opacity-60'>
+            {isPending ? '취소 중...' : '취소하기'}
           </button>
         </div>
       </div>
