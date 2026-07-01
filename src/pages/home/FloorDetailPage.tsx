@@ -16,6 +16,7 @@ import {useCreateReservation} from '@/pages/home/hooks/useCreateReservation';
 import {hoursToReservationTime} from '@/pages/home/utils/reservationTime';
 import {FLOOR_TO_API_VALUE, type FloorValue} from '@/pages/home/constants/home';
 import {type AvailabilityStatus} from '@/pages/home/api/availabilityApi';
+import ReservationLegendCard from '@/pages/home/components/ReservationLegendCard';
 
 const getFloorLabel = (floor: string) => `${floor}층`;
 
@@ -126,16 +127,7 @@ const FloorDetailPage = () => {
               ))}
             </div>
 
-            <div className='inline-grid grid-cols-[34px_auto] items-center gap-x-1.5 gap-y-1.5 rounded-lg bg-white p-2'>
-              <div className='border-text-body h-3.5 w-8.5 border border-dashed' />
-              <span className='text-text-body text-[9px]'>예약 가능</span>
-              <div className='h-3.5 w-8.5 bg-gray-200' />
-              <span className='text-text-body text-[9px]'>예약 선택 시</span>
-              <div className='bg-secondary h-3.5 w-8.5' />
-              <span className='text-text-body text-[9px]'>
-                예약 불가(레슨, 예약됨)
-              </span>
-            </div>
+            <ReservationLegendCard variant='reservation' />
           </div>
 
           {selectedRoom === null ? (

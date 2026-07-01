@@ -9,6 +9,7 @@ import ReservationStatusTimeline, {
 import {useRoomList} from '@/pages/home/hooks/useRoomList';
 import {useRoomSchedules} from '@/pages/home/hooks/useRoomSchedules';
 import {FLOOR_TO_API_VALUE, type FloorValue} from '@/pages/home/constants/home';
+import ReservationLegendCard from '@/pages/home/components/ReservationLegendCard';
 
 const getFloorLabel = (floor: string) => `${floor}층`;
 
@@ -66,14 +67,7 @@ const FloorStatusPage = () => {
               </button>
             ))}
 
-            <div className='mt-2 inline-grid grid-cols-[34px_auto] items-center gap-x-1.5 gap-y-1.5 rounded-lg bg-white p-2'>
-              <div className='border-text-body h-3.5 w-8.5 border border-dashed' />
-              <span className='text-text-body text-[9px]'>예약 가능</span>
-              <div className='bg-secondary h-3.5 w-8.5' />
-              <span className='text-text-body text-[9px]'>예약됨</span>
-              <div className='bg-secondary/20 h-3.5 w-8.5' />
-              <span className='text-text-body text-[9px]'>내 예약</span>
-            </div>
+            <ReservationLegendCard variant='reservation-list' className='mt-2' />
           </div>
 
           {selectedRoom === null ? (
