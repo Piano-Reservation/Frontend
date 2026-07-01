@@ -6,9 +6,12 @@ import {
   type CurrentRestriction,
 } from './types/restriction';
 
-export const getCurrentRestriction = () =>
-  http.get<CurrentRestriction>(
+export const getCurrentRestriction = async (): Promise<CurrentRestriction> => {
+  const response = await http.get<CurrentRestriction>(
     API_ENDPOINTS.RESTRICTION_CURRENT,
     currentRestrictionSchema,
     privateInstance
   );
+
+  return response.data;
+};
