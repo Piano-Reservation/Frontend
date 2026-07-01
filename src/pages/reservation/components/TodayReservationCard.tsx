@@ -2,6 +2,8 @@ import StatusBadge, {type ReservationStatus} from './StatusBadge';
 
 export interface Reservation {
   id: number;
+  type: 'reservation' | 'basementOccupancy';
+  occupancyId?: number;
   room: string;
   time: string;
   status: ReservationStatus;
@@ -12,7 +14,9 @@ interface TodayReservationCardProps {
   reservations: Reservation[];
   isLoading?: boolean;
   isError?: boolean;
+  isExitPending?: boolean;
   onCancelClick?: (reservation: Reservation) => void;
+  onExitClick?: (reservation: Reservation) => void;
 }
 
 function TodayReservationCard({
@@ -20,7 +24,9 @@ function TodayReservationCard({
   reservations,
   isLoading = false,
   isError = false,
+  isExitPending = false,
   onCancelClick,
+  onExitClick,
 }: TodayReservationCardProps) {
   return (
     <div className='rounded-xl bg-[var(--color-blue-700)] px-[18px] py-5'>
@@ -58,10 +64,13 @@ function TodayReservationCard({
 
               <StatusBadge
                 status={reservation.status}
+                disabled={reservation.status === 'exitable' && isExitPending}
                 onClick={
                   reservation.status === 'cancelable'
                     ? () => onCancelClick?.(reservation)
-                    : undefined
+                    : reservation.status === 'exitable'
+                      ? () => onExitClick?.(reservation)
+                      : undefined
                 }
               />
             </div>

@@ -1,6 +1,6 @@
 import {cn} from '@/shared/utils/cn';
 
-export type TimeSlotStatus = 'available' | 'booked';
+export type TimeSlotStatus = 'available' | 'reserved' | 'reservedByMe';
 
 export interface TimeSlot {
   hour: number;
@@ -44,7 +44,8 @@ const ReservationTimeline = ({
                 !isUserSelected &&
                 'border-text-body border border-dashed',
               status === 'available' && isUserSelected && 'bg-gray-200',
-              status === 'booked' && 'bg-secondary'
+              status === 'reserved' && 'bg-secondary',
+              status === 'reservedByMe' && 'bg-secondary/20'
             )}
           />
         </div>

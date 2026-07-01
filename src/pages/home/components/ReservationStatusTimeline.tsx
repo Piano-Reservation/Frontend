@@ -1,9 +1,9 @@
 import {cn} from '@/shared/utils/cn';
+import {type AvailabilityStatus} from '@/pages/home/api/availabilityApi';
 
 export interface StatusSlot {
   hour: number;
-  bookedBy: string | null;
-  isMine?: boolean;
+  status: AvailabilityStatus;
 }
 
 interface ReservationStatusTimelineProps {
@@ -12,24 +12,19 @@ interface ReservationStatusTimelineProps {
 
 const ReservationStatusTimeline = ({slots}: ReservationStatusTimelineProps) => (
   <div className='inline-grid grid-cols-[20px_64px] gap-x-2.5 gap-y-2.5'>
-    {slots.map(({hour, bookedBy, isMine}) => (
+    {slots.map(({hour, status}) => (
       <div key={hour} className='contents'>
         <span className='text-label3 text-text-body self-start text-center'>
           {hour}
         </span>
         <div
           className={cn(
-            'flex h-4.5 w-full items-center justify-center',
-            !bookedBy && 'border-text-body border border-dashed',
-            bookedBy && !isMine && 'bg-transparent',
-            bookedBy && isMine && 'bg-secondary/20'
-          )}>
-          {bookedBy && (
-            <span className='text-text-body text-[14px] leading-none font-medium tracking-[-0.28px]'>
-              {bookedBy}
-            </span>
+            'h-4.5 w-full',
+            status === 'AVAILABLE' && 'border-text-body border border-dashed',
+            status === 'RESERVED' && 'bg-secondary',
+            status === 'RESERVED_BY_ME' && 'bg-secondary/20'
           )}
-        </div>
+        />
       </div>
     ))}
   </div>

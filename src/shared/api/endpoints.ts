@@ -17,11 +17,16 @@ export const API_ENDPOINTS = {
     READ_ALL: '/api/notifications/all',
   },
   ROOM_LIST: '/api/rooms',
+  ROOM_SCHEDULES: '/api/room-schedules',
   RESTRICTION_CURRENT: '/api/me/restrictions/current',
   MY_RESERVATION: {
     LIST: (date: string) => `/api/me/reservations?date=${date}`,
     HISTORY: (page: number, size: number) =>
       `/api/me/reservations/history?page=${page}&size=${size}`,
   },
+  BASEMENT_OCCUPANCIES: '/api/basement/occupancies',
+  BASEMENT_OCCUPANCY_EXIT: (occupancyId: number) =>
+    `/api/basement/occupancies/${occupancyId}`,
+  BASEMENT_OCCUPANCY_STATUS: '/api/basement/occupancies/status',
   MY_BASEMENT_OCCUPANCIES: '/api/me/basement/occupancies',
 } as const;

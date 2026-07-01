@@ -1,7 +1,7 @@
 import type {CurrentRestriction} from '../api/types/restriction';
 
 interface RestrictionStatusCardProps {
-  restrictionInfo?: CurrentRestriction;
+  restrictionInfo: CurrentRestriction | undefined;
   isLoading?: boolean;
   isError?: boolean;
 }
