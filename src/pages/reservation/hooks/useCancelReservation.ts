@@ -9,9 +9,20 @@ export const useCancelReservation = (date: string) => {
   return useMutation({
     mutationFn: cancelReservation,
     onSuccess: async () => {
-      await queryClient.invalidateQueries({
-        queryKey: QUERY_KEYS.RESERVATION.MY_LIST(date),
-      });
+      await Promise.all([
+        queryClient.invalidateQueries({
+          queryKey: QUERY_KEYS.RESERVATION.MY_LIST(date),
+        }),
+        queryClient.invalidateQueries({
+          queryKey: QUERY_KEYS.RESERVATION.MY_HISTORY,
+        }),
+        queryClient.invalidateQueries({
+          queryKey: ['reservation', 'availability'],
+        }),
+        queryClient.invalidateQueries({
+          queryKey: ['room', 'schedules'],
+        }),
+      ]);
     },
   });
 };

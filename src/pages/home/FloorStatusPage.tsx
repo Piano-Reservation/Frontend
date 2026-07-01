@@ -68,7 +68,7 @@ const FloorStatusPage = () => {
           </h1>
         </div>
 
-        <div className='flex items-start justify-between'>
+        <div className='flex min-h-100 items-start justify-between'>
           <div className='flex flex-col gap-3'>
             {roomItems.map((room) => (
               <button
@@ -76,10 +76,10 @@ const FloorStatusPage = () => {
                 type='button'
                 onClick={() => setSelectedRoom(room.roomId)}
                 className={cn(
-                  'text-button4 w-60 overflow-hidden rounded-lg p-3 text-left tracking-[-0.24px]',
+                  'text-button4 w-60 overflow-hidden rounded-lg border p-3 text-left tracking-[-0.24px]',
                   selectedRoom === room.roomId
-                    ? 'bg-action-primary text-white'
-                    : 'bg-bg-surface border-border-default text-text-body border'
+                    ? 'border-action-primary bg-action-primary text-white'
+                    : 'bg-bg-surface border-border-default text-text-body'
                 )}>
                 {room.name}
               </button>

@@ -1,7 +1,8 @@
 import {DAYS} from '../constants/home';
+import {getCurrentDate} from '@/shared/utils/date';
 
 const HomeDate = () => {
-  const now = new Date();
+  const now = getCurrentDate();
   const month = now.getMonth() + 1;
   const day = now.getDate();
   const dayOfWeek = DAYS[now.getDay()];
