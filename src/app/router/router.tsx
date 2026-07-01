@@ -2,6 +2,7 @@ import {createBrowserRouter, Navigate} from 'react-router';
 
 import {ROUTES} from '@/shared/constants/routes';
 import AppLayout from '@/app/layout/AppLayout';
+import AuthGuard from '@/app/layout/AuthGuard';
 import {HomePage} from '@/pages/home/HomePage';
 
 export const router = createBrowserRouter([
@@ -17,67 +18,72 @@ export const router = createBrowserRouter([
     },
   },
   {
-    path: ROUTES.PASSWORD_CHANGE,
-    lazy: async () => {
-      const {PasswordChangePage} =
-        await import('@/pages/mypage/PasswordChangePage');
-      return {Component: PasswordChangePage};
-    },
-  },
-  {
-    path: ROUTES.REPORT,
-    lazy: async () => {
-      const {ReportPage} = await import('@/pages/mypage/ReportPage');
-      return {Component: ReportPage};
-    },
-  },
-  {
-    element: <AppLayout />,
+    element: <AuthGuard />,
     children: [
       {
-        path: ROUTES.HOME,
-        element: <HomePage />,
-      },
-      {
-        path: ROUTES.RESERVATION,
+        path: ROUTES.PASSWORD_CHANGE,
         lazy: async () => {
-          const {MyReservationPage} =
-            await import('@/pages/reservation/MyReservationPage');
-          return {Component: MyReservationPage};
+          const {PasswordChangePage} =
+            await import('@/pages/mypage/PasswordChangePage');
+          return {Component: PasswordChangePage};
         },
       },
       {
-        path: ROUTES.RESERVATION_DETAIL,
+        path: ROUTES.REPORT,
         lazy: async () => {
-          const {ReservationDetailPage} =
-            await import('@/pages/reservation/ReservationDetailPage');
-          return {Component: ReservationDetailPage};
+          const {ReportPage} = await import('@/pages/mypage/ReportPage');
+          return {Component: ReportPage};
         },
       },
       {
-        path: ROUTES.MY_PAGE,
+        element: <AppLayout />,
+        children: [
+          {
+            path: ROUTES.HOME,
+            element: <HomePage />,
+          },
+          {
+            path: ROUTES.RESERVATION,
+            lazy: async () => {
+              const {MyReservationPage} =
+                await import('@/pages/reservation/MyReservationPage');
+              return {Component: MyReservationPage};
+            },
+          },
+          {
+            path: ROUTES.RESERVATION_DETAIL,
+            lazy: async () => {
+              const {ReservationDetailPage} =
+                await import('@/pages/reservation/ReservationDetailPage');
+              return {Component: ReservationDetailPage};
+            },
+          },
+          {
+            path: ROUTES.MY_PAGE,
+            lazy: async () => {
+              const {MyPage} = await import('@/pages/mypage/MyPage');
+              return {Component: MyPage};
+            },
+          },
+        ],
+      },
+      {
+        path: ROUTES.FLOOR_DETAIL,
         lazy: async () => {
-          const {MyPage} = await import('@/pages/mypage/MyPage');
-          return {Component: MyPage};
+          const {default: FloorDetailPage} =
+            await import('@/pages/home/FloorDetailPage');
+          return {Component: FloorDetailPage};
+        },
+      },
+      {
+        path: ROUTES.FLOOR_STATUS,
+        lazy: async () => {
+          const {default: FloorStatusPage} =
+            await import('@/pages/home/FloorStatusPage');
+          return {Component: FloorStatusPage};
         },
       },
     ],
-  },
-  {
-    path: ROUTES.FLOOR_DETAIL,
-    lazy: async () => {
-      const {default: FloorDetailPage} =
-        await import('@/pages/home/FloorDetailPage');
-      return {Component: FloorDetailPage};
-    },
-  },
-  {
-    path: ROUTES.FLOOR_STATUS,
-    lazy: async () => {
-      const {default: FloorStatusPage} =
-        await import('@/pages/home/FloorStatusPage');
-      return {Component: FloorStatusPage};
-    },
   },
   {
     path: '*',

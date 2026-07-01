@@ -42,7 +42,6 @@ export const PasswordChangePage = () => {
       {currentPassword, newPassword},
       {
         onSuccess: (message) => {
-          localStorage.removeItem('accessToken');
           showToast({
             variant: 'success',
             message:
