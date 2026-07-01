@@ -20,6 +20,7 @@ export const QUERY_KEYS = {
   },
   BASEMENT: {
     MY_OCCUPANCIES: ['basement', 'my-occupancies'] as const,
+    OCCUPANCY_STATUS: ['basement', 'occupancy-status'] as const,
   },
   NOTIFICATION: {
     LIST: ['notification', 'list'] as const,

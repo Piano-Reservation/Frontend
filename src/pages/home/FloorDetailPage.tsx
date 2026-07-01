@@ -162,9 +162,7 @@ const FloorDetailPage = () => {
         confirmDisabled={isPending}
         onConfirm={handleConfirmReservation}
         onClose={close}>
-        <p>
-          · 3층 연습실은 한 연습실에 최대 2시간, 일일 최대 6시간까지 예약 가능
-        </p>
+        <p>· 연습실은 선택한 시간에만 사용할 수 있습니다.</p>
         <p>· 오후 연습실은 본인 전공실에 맞춰 신청</p>
         <p>· 당일 오후 13:00 이후부터는 학년 구분 없이 사용 가능</p>
       </Modal>
