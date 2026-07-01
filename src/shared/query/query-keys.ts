@@ -8,10 +8,18 @@ export const QUERY_KEYS = {
       ['room', 'schedules', floor, date] as const,
   },
   RESERVATION: {
-    AVAILABILITY: (roomId: number, date: string) =>
-      ['reservation', 'availability', roomId, date] as const,
-    MY_LIST: ['reservation', 'my-list'] as const,
+    AVAILABILITY: (roomIdOrDate: number | string, date?: string) =>
+      date
+        ? (['reservation', 'availability', roomIdOrDate, date] as const)
+        : (['reservation', 'availability', roomIdOrDate] as const),
+    MY_LIST: (date?: string) =>
+      date
+        ? (['reservation', 'my-list', date] as const)
+        : (['reservation', 'my-list'] as const),
     MY_HISTORY: ['reservation', 'my-history'] as const,
+  },
+  BASEMENT: {
+    MY_OCCUPANCIES: ['basement', 'my-occupancies'] as const,
   },
   NOTIFICATION: {
     LIST: ['notification', 'list'] as const,

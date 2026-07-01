@@ -32,9 +32,8 @@ const LoginPage = () => {
           label='비밀번호'
           placeholder='비밀번호를 입력하세요'
           type='password'
-          inputMode='numeric'
           value={password}
-          onChange={(e) => setPassword(e.target.value.replace(/\D/g, ''))}
+          onChange={(e) => setPassword(e.target.value)}
           minLength={6}
           maxLength={72}
           autoComplete='current-password'

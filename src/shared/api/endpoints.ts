@@ -20,7 +20,9 @@ export const API_ENDPOINTS = {
   ROOM_SCHEDULES: '/api/room-schedules',
   RESTRICTION_CURRENT: '/api/me/restrictions/current',
   MY_RESERVATION: {
-    LIST: '/api/me/reservations',
-    HISTORY: '/api/me/reservations/history',
+    LIST: (date: string) => `/api/me/reservations?date=${date}`,
+    HISTORY: (page: number, size: number) =>
+      `/api/me/reservations/history?page=${page}&size=${size}`,
   },
+  MY_BASEMENT_OCCUPANCIES: '/api/me/basement/occupancies',
 } as const;

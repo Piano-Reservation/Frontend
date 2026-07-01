@@ -1,19 +1,12 @@
-type RestrictionStatus = 'normal' | 'restricted';
-
-interface RestrictionInfo {
-  status: RestrictionStatus;
-  reason: string;
-  startDate: string;
-  endDate: string;
-  remainingDays: string;
-}
+import type {CurrentRestriction} from '../api/types/restriction';
 
 interface RestrictionStatusCardProps {
-  restrictionInfo: RestrictionInfo;
+  restrictionInfo: CurrentRestriction;
 }
 
 function RestrictionStatusCard({restrictionInfo}: RestrictionStatusCardProps) {
-  const isRestricted = restrictionInfo.status === 'restricted';
+  const isRestricted = restrictionInfo.restricted;
+  const formatDate = (date: string) => date.replaceAll('-', '.');
 
   return (
     <section className='mb-[23px] overflow-hidden rounded-[14px] border border-[var(--color-blue-100)] bg-white'>
@@ -30,7 +23,7 @@ function RestrictionStatusCard({restrictionInfo}: RestrictionStatusCardProps) {
         </span>
       </div>
 
-      {isRestricted ? (
+      {restrictionInfo.restricted ? (
         <div>
           <div className='flex items-center justify-between border-b border-[var(--color-blue-100)] px-[22px] py-[18px]'>
             <span className='text-label2 text-black'>제한 사유</span>
@@ -42,21 +35,21 @@ function RestrictionStatusCard({restrictionInfo}: RestrictionStatusCardProps) {
           <div className='flex items-center justify-between border-b border-[var(--color-blue-100)] px-[22px] py-[18px]'>
             <span className='text-label2 text-black'>제한 시작일</span>
             <span className='text-body2 text-black'>
-              {restrictionInfo.startDate}
+              {formatDate(restrictionInfo.startDate)}
             </span>
           </div>
 
           <div className='flex items-center justify-between border-b border-[var(--color-blue-100)] px-[22px] py-[18px]'>
             <span className='text-label2 text-black'>제한 종료일</span>
             <span className='text-body2 text-black'>
-              {restrictionInfo.endDate}
+              {formatDate(restrictionInfo.endDate)}
             </span>
           </div>
 
           <div className='flex items-center justify-between px-[22px] py-[18px]'>
             <span className='text-label2 text-black'>남은 제한 일수</span>
             <span className='text-body2 text-[var(--color-red-600)]'>
-              {restrictionInfo.remainingDays}
+              {restrictionInfo.remainingDays}일
             </span>
           </div>
         </div>
