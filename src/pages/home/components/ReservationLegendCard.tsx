@@ -1,6 +1,6 @@
 import {cn} from '@/shared/utils/cn';
 
-type ReservationLegendVariant = 'reservation' | 'reservation-list';
+export type ReservationLegendVariant = 'reservation' | 'reservation-list';
 
 interface ReservationLegendItem {
   label: string;
@@ -12,34 +12,49 @@ interface ReservationLegendCardProps {
   className?: string;
 }
 
-const RESERVATION_ITEMS: ReservationLegendItem[] = [
-  {
-    label: '예약 가능',
-    swatchClassName: 'border-text-body border border-dashed',
-  },
-  {
-    label: '예약 선택 시',
-    swatchClassName: 'bg-gray-200',
-  },
-  {
-    label: '내 예약',
-    swatchClassName: 'bg-secondary/20',
-  },
-  {
-    label: '예약 불가(레슨, 예약됨)',
-    swatchClassName: 'bg-secondary',
-  },
-];
-
-const RESERVATION_LIST_ITEMS: ReservationLegendItem[] =
-  RESERVATION_ITEMS.filter((item) => item.label !== '예약 선택 시');
+const RESERVATION_LEGEND_ITEMS: Record<
+  ReservationLegendVariant,
+  ReservationLegendItem[]
+> = {
+  reservation: [
+    {
+      label: '예약 가능',
+      swatchClassName: 'border-text-body border border-dashed',
+    },
+    {
+      label: '예약 선택 중',
+      swatchClassName: 'bg-gray-200',
+    },
+    {
+      label: '내 예약',
+      swatchClassName: 'bg-secondary/20',
+    },
+    {
+      label: '예약 불가(입실, 예약중)',
+      swatchClassName: 'bg-secondary',
+    },
+  ],
+  'reservation-list': [
+    {
+      label: '예약 가능',
+      swatchClassName: 'border-text-body border border-dashed',
+    },
+    {
+      label: '내 예약',
+      swatchClassName: 'bg-secondary/20',
+    },
+    {
+      label: '예약 불가(입실, 예약중)',
+      swatchClassName: 'bg-secondary',
+    },
+  ],
+};
 
 const ReservationLegendCard = ({
   variant,
   className,
 }: ReservationLegendCardProps) => {
-  const items =
-    variant === 'reservation' ? RESERVATION_ITEMS : RESERVATION_LIST_ITEMS;
+  const items = RESERVATION_LEGEND_ITEMS[variant];
 
   return (
     <div

@@ -85,18 +85,7 @@ const FloorStatusPage = () => {
               </button>
             ))}
 
-            {isBasementFloor ? (
-              <div className='mt-2 inline-grid grid-cols-[34px_90px] items-center gap-x-1.5 gap-y-1.5 rounded-lg bg-white p-2'>
-                <div className='border-text-body h-3.5 w-8.5 border border-dashed' />
-                <span className='text-text-body text-[10px] leading-none font-semibold tracking-[-0.02em] whitespace-nowrap'>
-                  사용 가능
-                </span>
-                <div className='bg-secondary h-3.5 w-8.5' />
-                <span className='text-text-body text-[10px] leading-none font-semibold tracking-[-0.02em] whitespace-nowrap'>
-                  사용 중
-                </span>
-              </div>
-            ) : (
+            {!isBasementFloor && (
               <ReservationLegendCard
                 variant='reservation-list'
                 className='mt-2'
@@ -109,18 +98,24 @@ const FloorStatusPage = () => {
               연습실을 선택해주세요
             </p>
           ) : isBasementFloor ? (
-            <section className='flex h-40 w-32 flex-col justify-center rounded-md bg-white p-4 shadow-[0px_0px_2px_0px_rgba(0,0,0,0.25)]'>
+            <section
+              className={cn(
+                'flex h-72 w-23.5 flex-col items-center justify-center rounded-lg',
+                selectedBasementStatus?.occupied
+                  ? 'bg-secondary'
+                  : 'border-action-primary bg-white text-action-primary border'
+              )}>
               <span
                 className={cn(
-                  'text-label3 mb-2',
+                  'text-label3 text-center',
                   selectedBasementStatus?.occupied
-                    ? 'text-secondary'
-                    : 'text-text-body'
+                    ? 'text-white'
+                    : 'text-action-primary'
                 )}>
                 {selectedBasementStatus?.occupied ? '사용 중' : '사용 가능'}
               </span>
               {selectedBasementStatus?.occupied && (
-                <div className='text-caption6 text-text-body flex flex-col gap-1'>
+                <div className='text-caption5 text-black mt-3 flex flex-col items-center gap-1'>
                   <span>{selectedBasementStatus.occupantName}</span>
                   {basementEnteredAt && <span>{basementEnteredAt} 입실</span>}
                 </div>
