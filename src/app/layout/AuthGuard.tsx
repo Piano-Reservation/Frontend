@@ -7,13 +7,14 @@ import {QUERY_KEYS} from '@/shared/query/query-keys';
 
 const AuthGuard = () => {
   const location = useLocation();
-  const {isPending, isError} = useQuery({
+  const {isPending, isFetching, isError} = useQuery({
     queryKey: QUERY_KEYS.USER.ME,
     queryFn: getMyInfo,
     retry: false,
+    staleTime: 0,
   });
 
-  if (isPending) {
+  if (isPending || isFetching) {
     return (
       <div className='flex min-h-dvh items-center justify-center'>
         Loading...
