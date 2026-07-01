@@ -17,7 +17,6 @@ const GRADE_LABELS: Record<Grade, string> = {
 const menuItems = [
   {id: 1, label: '비밀번호 수정'},
   {id: 2, label: '신고하기'},
-  {id: 3, label: '이용 약관'},
 ];
 
 export const MyPage = () => {
