@@ -2,11 +2,29 @@ import {privateInstance} from '@/shared/api/axios';
 import {API_ENDPOINTS} from '@/shared/api/endpoints';
 import {http} from '@/shared/api/http';
 import {
+  basementOccupancySchema,
   basementOccupancyListSchema,
   basementOccupancyStatusListSchema,
   type BasementOccupancy,
   type BasementOccupancyStatus,
 } from './types/basementOccupancy';
+
+interface CreateBasementOccupancyRequest {
+  roomId: number;
+}
+
+export const postBasementOccupancy = async (
+  body: CreateBasementOccupancyRequest
+): Promise<BasementOccupancy> => {
+  const response = await http.post<BasementOccupancy>(
+    API_ENDPOINTS.BASEMENT_OCCUPANCIES,
+    body,
+    basementOccupancySchema,
+    privateInstance
+  );
+
+  return response.data;
+};
 
 export const getMyBasementOccupancies = async (): Promise<
   BasementOccupancy[]

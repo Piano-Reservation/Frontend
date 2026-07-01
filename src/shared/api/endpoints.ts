@@ -24,6 +24,7 @@ export const API_ENDPOINTS = {
     HISTORY: (page: number, size: number) =>
       `/api/me/reservations/history?page=${page}&size=${size}`,
   },
-  MY_BASEMENT_OCCUPANCIES: '/api/me/basement/occupancies',
+  BASEMENT_OCCUPANCIES: '/api/basement/occupancies',
   BASEMENT_OCCUPANCY_STATUS: '/api/basement/occupancies/status',
+  MY_BASEMENT_OCCUPANCIES: '/api/me/basement/occupancies',
 } as const;
