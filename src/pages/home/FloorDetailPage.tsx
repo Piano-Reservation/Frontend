@@ -138,7 +138,7 @@ const FloorDetailPage = () => {
 
         <div
           className={cn(
-            'flex items-stretch',
+            'flex min-h-100 items-stretch',
             isBasementFloor ? 'flex-1 justify-center' : 'justify-between'
           )}>
           <div
@@ -158,10 +158,10 @@ const FloorDetailPage = () => {
                     setSelectedHours([]);
                   }}
                   className={cn(
-                    'text-button4 w-60 overflow-hidden rounded-lg p-3 text-left tracking-[-0.24px]',
+                    'text-button4 w-60 overflow-hidden rounded-lg border p-3 text-left tracking-[-0.24px]',
                     selectedRoom === room.roomId
-                      ? 'bg-action-primary text-white'
-                      : 'bg-bg-surface border-border-default text-text-body border'
+                      ? 'border-action-primary bg-action-primary text-white'
+                      : 'bg-bg-surface border-border-default text-text-body'
                   )}>
                   {room.name}
                 </button>
