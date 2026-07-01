@@ -26,6 +26,18 @@ export const postBasementOccupancy = async (
   return response.data;
 };
 
+export const patchBasementOccupancyExit = async (
+  occupancyId: number
+): Promise<BasementOccupancy> => {
+  const response = await http.patch<BasementOccupancy>(
+    API_ENDPOINTS.BASEMENT_OCCUPANCY_EXIT(occupancyId),
+    basementOccupancySchema,
+    privateInstance
+  );
+
+  return response.data;
+};
+
 export const getMyBasementOccupancies = async (): Promise<
   BasementOccupancy[]
 > => {

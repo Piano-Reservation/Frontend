@@ -29,4 +29,14 @@ export const http = {
     const result = createApiSuccessSchema(dataSchema).parse(response.data);
     return {message: result.message, data: result.data as T};
   },
+
+  patch: async <T>(
+    url: string,
+    dataSchema: z.ZodType<T>,
+    instance: AxiosInstance = publicInstance
+  ): Promise<ApiResponse<T>> => {
+    const response = await instance.patch(url);
+    const result = createApiSuccessSchema(dataSchema).parse(response.data);
+    return {message: result.message, data: result.data as T};
+  },
 };
