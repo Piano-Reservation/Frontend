@@ -10,14 +10,12 @@ interface MenuItem {
 interface MyPageMenuListProps {
   menuItems: MenuItem[];
   isLoggingOut: boolean;
-  logoutError: string | null;
   onLogout: () => void;
 }
 
 function MyPageMenuList({
   menuItems,
   isLoggingOut,
-  logoutError,
   onLogout,
 }: MyPageMenuListProps) {
   const navigate = useNavigate();
@@ -55,14 +53,6 @@ function MyPageMenuList({
         </span>
         <img src={IcRight} alt='다음 로고' className='h-[20px] w-[20px]' />
       </button>
-
-      {logoutError && (
-        <p
-          role='alert'
-          className='text-caption5 border-t border-[#D8DDEB] px-[15px] py-[10px] text-[var(--color-red-600)]'>
-          {logoutError}
-        </p>
-      )}
     </section>
   );
 }
